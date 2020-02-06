@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+
 @Entity
 public class Show {
 
@@ -26,31 +29,30 @@ public class Show {
 
 	private int capacidade;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date data;
 	
 	
 	private String horario;
 
+	@NumberFormat(pattern ="#,##0.00")
 	private BigDecimal ingresso;
 	
 	@ManyToOne
-	private EspacoEvento local;
+	private EspacoEvento casa;
 	
 	
 	
 	
-	public EspacoEvento getLocal() {
-		return local;
-	}
-	public void setLocal(EspacoEvento local) {
-		this.local = local;
-	}
-	public Long getCodigo() {
+
+	
+	
+	public Long getId() {
 		return id;
 	}
-	public void setCodigo(Long codigo) {
-		this.id = codigo;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getNome() {
 		return nome;
@@ -88,6 +90,13 @@ public class Show {
 	public void setIngresso(BigDecimal ingresso) {
 		this.ingresso = ingresso;
 	}
+	public EspacoEvento getCasa() {
+		return casa;
+	}
+	public void setCasa(EspacoEvento casa) {
+		this.casa = casa;
+	}
+	
 	
 	
 	

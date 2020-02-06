@@ -1,12 +1,16 @@
 package br.com.gft.controller;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.gft.model.EspacoEvento;
 import br.com.gft.model.Show;
+import br.com.gft.model.StatusUsuario;
 import br.com.gft.model.Usuarios;
 import br.com.gft.repository.Casas;
 import br.com.gft.repository.Eventos;
@@ -24,6 +28,8 @@ public class ShowController {
 	@Autowired
 	private ListaUsuarios lista;
 	
+	
+	
 	@RequestMapping("/home")
 	public String Home() {
 		return"Home";
@@ -31,30 +37,43 @@ public class ShowController {
 	}
 	
 	@RequestMapping("/espacoeventos")
-	public String EspacoEventos() {
-		return"CadastroEspacoEventos";
+	public ModelAndView EspacoEventos() {
+		ModelAndView mv = new ModelAndView("CadastroEspacoEventos");
+		
+		return mv;
 		
 	}
+	
+	
+	
+	
+	
 	@RequestMapping(value ="/espacoeventos",method = RequestMethod.POST)
-	public String salvar(EspacoEvento espacoevento) {
+	public ModelAndView salvar(EspacoEvento espacoevento) {
 		// Todo: salvar no banco de dados
 		
 		casas.save(espacoevento);
-		return "CadastroEspacoEventos";
+		ModelAndView mv = new ModelAndView("CadastroEspacoEventos");
+		mv.addObject("mensagem", "casa cadastrada com sucesso!!!!!");
+		return mv;
 	}
-	
+
 	
 	@RequestMapping("/shows")
-	public String Shows() {
-		return"CadastroShow";
+	public ModelAndView Shows() {
+		ModelAndView mv = new ModelAndView("CadastroShow");
+		
+		return mv;
 	}
 	
 	@RequestMapping(value ="/shows",method = RequestMethod.POST)
-	public String salvar(Show show) {
+	public ModelAndView salvar(Show show) {
 		// Todo: salvar no banco de dados
 		
 		eventos.save(show);
-		return "CadastroShow";
+		ModelAndView mv = new ModelAndView("CadastroShow");
+		mv.addObject("mensagem", "Show cadastrado com sucesso!!!!!");
+		return mv;
 	}
 	
 	@RequestMapping("/listashows")
@@ -64,16 +83,20 @@ public class ShowController {
 	
 	
 	@RequestMapping("/cadastro")
-	public String CadastroUsuario() {
-		return"CadastroUsuario";
+	public ModelAndView CadastroUsuario() {
+		ModelAndView mv = new ModelAndView("CadastroUsuario");
+		mv.addObject("todosStatusUsuario", StatusUsuario.values());
+		return mv;
 	}
 	
 	@RequestMapping(value ="/cadastro",method = RequestMethod.POST)
-	public String salvar(Usuarios usuario) {
+	public ModelAndView salvar(Usuarios usuario) {
 		// Todo: salvar no banco de dados
-		
 		lista.save(usuario);
-		return "CadastroShow";
+		ModelAndView mv = new ModelAndView("CadastroUsuario");
+		mv.addObject("mensagem", "Cadastro salvo com sucesso!!!!!");
+		mv.addObject("todosStatusUsuario", StatusUsuario.values());
+		return mv;
 	}
 	
 	

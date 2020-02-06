@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="pt-br" dir="ltr"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -76,18 +78,20 @@
 					<div class="entry-header">
 
 
-						<form method="POST">
-							
+						<form method="POST"action="/cadastro">
+								<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}" >
+									<span th:text="${mensagem}">Casa cadastrada com sucesso</span>
+								</div>
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefault01">PRIMEIRO NOME</label> 
 									<input
-										type="text" class="form-control" id="validationDefault01" 
-										placeholder="Nome" value="Mark" >
+										type="text" class="form-control" name="primeiroNome"  
+										placeholder="ex: Mark"  >
 								</div>
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefault02">SOBRE NOME</label>
-									 <input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+									 <input type="text" class="form-control" name="sobreNome"
+										placeholder="ex: Bezerra Gomes">
 								</div>
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefaultUsername">EMAIL</label>
@@ -95,8 +99,8 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="inputGroupPrepend2">@</span>
 										</div>
-										<input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+										<input type="text" class="form-control" name="email"
+										placeholder="ex: NOME@gmail.com">
 									</div>
 								</div>
 							
@@ -104,20 +108,22 @@
 							
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefault03">CPF</label>
-									 <input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+									 <input type="text" class="form-control" name="cpf"
+										placeholder="ex: 123.123.123-12">
 								</div>
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefault04">DATA DE NASCIMENTO</label> 
-									<input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+									<input type="text" class="form-control" name="dataNascimento"
+										placeholder="ex: 09/09/2009">
 								</div>
 								<div class="form-group row ">
-									<label for="sexo" class="col-sm-2 control-label" >SEXO</label> 
+									<label for="sexo" class="col-sm-2 control-label">SEXO</label> 
 									<div class="col-sm-2">
-									<select class="form-control" name="status">
-										<option value="MASCULINO">Masculino</option>
-										<option value="FEMININO">Feminino</option>
+									<select class="form-control" name="sexo">
+									
+										<option th:each="status: ${todosStatusUsuario}" th:value="${status}"
+										th:text="${status.descricao}"> </option>
+									
 									</select>
 									</div>	
 								</div>
@@ -125,47 +131,47 @@
 							
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefault01">CELULAR</label> 
-									<input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+									<input type="text" class="form-control" name="celular"
+										placeholder="ex: 01199999-9999">
 								</div>
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefault02">ENDEREÇO</label>
-									 <input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+									 <input type="text" class="form-control" name="endereco"
+										placeholder="ex: AV Goias">
 								</div>
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefault02">NUMERO</label>
-									 <input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+									 <input type="text" class="form-control" name="numero"
+										placeholder="ex: 440">
 								</div>
 							
 							
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefault03">CIDADE</label> 
-									<input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+									<input type="text" class="form-control" name="cidade"
+										placeholder="ex: São Paulo">
 								</div>
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefault04">ESTADO</label> 
-									<input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+									<input type="text" class="form-control" name="estado"
+										placeholder="ex: SP">
 								</div>
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefault05">CEP</label> 
-									<input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+									<input type="text" class="form-control" name="cep"
+										placeholder="ex: 06158-058">
 								</div>
 							
 							
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefault03">NOME DO USUARIO</label> 
-									<input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+									<input type="text" class="form-control" name="nomeUsuario"
+										placeholder="ex: marilda">
 								</div>
 								<div class="form-group row col-md-6 mb-3">
 									<label for="validationDefault04">SENHA</label> 
-									<input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+									<input type="text" class="form-control" name="senha"
+										placeholder="ex: ******">
 								</div>
 								
 							
@@ -198,16 +204,7 @@
 		<!-- .container -->
 	</div>
 	<!-- .hero-content -->
-
-
-
-
-
-
-
-
-
-
+	
 	<footer class="site-footer">
 		<div
 			class="footer-cover-title flex justify-content-center align-items-center">

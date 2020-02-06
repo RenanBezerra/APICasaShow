@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="pt-br" dir="ltr"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -78,6 +80,10 @@
 
 
 						<form method="POST" >
+						
+							<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}" >
+									<span th:text="${mensagem}">Casa cadastrada com sucesso</span>
+								</div>
 							<div class="form-group row ">
 								<label for="nome" class="col-sm-2 control-label">NOME</label>
 								<div class="col-sm-4">
@@ -118,10 +124,12 @@
 								<label for="ingresso" class="col-sm-2 control-label">VALOR
 									DO INGRESSO</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency" id="ingresso"
+									<input type="text" class="form-control js-currency" 
 										name="ingresso" placeholder="ex: R$ 45,00"/>
 								</div>
 							</div>
+							
+						
 
 
 							<button type="submit" class="btn btn-outline-primary">Salvar</button>

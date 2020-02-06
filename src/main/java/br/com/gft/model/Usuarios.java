@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Usuarios {
 	
@@ -18,7 +20,7 @@ public class Usuarios {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String primeioNome;
+	private String primeiroNome;
 	
 	private String sobreNome;
 	
@@ -26,27 +28,28 @@ public class Usuarios {
 	
 	private String cpf;
 	
+	@DateTimeFormat(pattern ="dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 	
 	@Enumerated(EnumType.STRING)
 	private StatusUsuario sexo;
 	
-	private int celular;
+	private String celular;
 	
 	private String endereco;
 	
-	private int numero;
+	private String numero;
 	
 	private String cidade;
 	
 	private String estado;
 	
-	private int cep;
+	private String cep;
 	
 	private String nomeUsuario;
 	
-	private int senha;
+	private String senha;
 
 	public Long getId() {
 		return id;
@@ -56,12 +59,12 @@ public class Usuarios {
 		this.id = id;
 	}
 
-	public String getPrimeioNome() {
-		return primeioNome;
+	public String getPrimeiroNome() {
+		return primeiroNome;
 	}
 
-	public void setPrimeioNome(String primeioNome) {
-		this.primeioNome = primeioNome;
+	public void setPrimeiroNome(String primeiroNome) {
+		this.primeiroNome = primeiroNome;
 	}
 
 	public String getSobreNome() {
@@ -104,11 +107,11 @@ public class Usuarios {
 		this.sexo = sexo;
 	}
 
-	public int getCelular() {
+	public String getCelular() {
 		return celular;
 	}
 
-	public void setCelular(int celular) {
+	public void setCelular(String celular) {
 		this.celular = celular;
 	}
 
@@ -120,11 +123,11 @@ public class Usuarios {
 		this.endereco = endereco;
 	}
 
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
@@ -144,11 +147,11 @@ public class Usuarios {
 		this.estado = estado;
 	}
 
-	public int getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(int cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 
@@ -160,11 +163,11 @@ public class Usuarios {
 		this.nomeUsuario = nomeUsuario;
 	}
 
-	public int getSenha() {
+	public String getSenha() {
 		return senha;
 	}
 
-	public void setSenha(int senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
