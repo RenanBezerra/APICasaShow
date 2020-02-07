@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 @Entity
-public class Show {
+public class Evento {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,12 +41,21 @@ public class Show {
 	private BigDecimal ingresso;
 	
 	@ManyToOne
+	@JoinColumn(name="casa_codigo")
 	private EspacoEvento casa;
 	
-	
+	private String casaevento;
 	
 	
 
+	
+	
+	public String getcasaevento() {
+		return casaevento;
+	}
+	public void setcasaevento(String casaevento) {
+		this.casaevento = casaevento;
+	}
 	
 	
 	public Long getId() {
@@ -115,7 +125,7 @@ public class Show {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Show other = (Show) obj;
+		Evento other = (Evento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -5,6 +5,18 @@
     display: flex;
 }
 
+.correnan {
+	color:white;
+	padding:0px;
+}
+.aw-link-card{
+	float:right;
+	padding: 0px;
+}
+.aw-titulo-card{
+	float:left;
+	padding-top:2px;
+}
 body {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;

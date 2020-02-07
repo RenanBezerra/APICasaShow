@@ -22,13 +22,13 @@ public class EspacoEvento {
 	private Long codigo;
 	
 	
-	private String nome;
+	private String nomecasa;
 	
 
 	private String local;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy ="casa")
-	private List<Show> shows;
+	private List<Evento> shows;
 
 	
 	public Long getCodigo() {
@@ -41,13 +41,16 @@ public class EspacoEvento {
 	}
 
 
-	public String getNome() {
-		return nome;
+	
+
+
+	public String getNomecasa() {
+		return nomecasa;
 	}
 
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomecasa(String nomecasa) {
+		this.nomecasa = nomecasa;
 	}
 
 
@@ -62,12 +65,12 @@ public class EspacoEvento {
 
 	
 	
-	public List<Show> getShows() {
+	public List<Evento> getShows() {
 		return shows;
 	}
 
 
-	public void setShows(List<Show> shows) {
+	public void setShows(List<Evento> shows) {
 		this.shows = shows;
 	}
 

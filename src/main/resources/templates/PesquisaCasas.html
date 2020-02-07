@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" dir="ltr"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" dir="ltr">
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -33,7 +31,7 @@
 				<div class="row align-items-center">
 					<div class="col-10 col-lg-4">
 						<h1 class="site-branding flex">
-							<a href="#">CADASTRO SHOW</a>
+							<a href="#">PESQUISA CASAS</a>
 						</h1>
 					</div>
 
@@ -75,94 +73,57 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12 offset-lg-2 col-lg-10">
-					<div class="entry-header">
-						<!-- .countdown-holder -->
+					<div class="entry-header"></div>
+					<!-- .countdown-holder -->
 
-
-						<form method="POST" >
-						
-							<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}" >
-									<span th:text="${mensagem}">Casa cadastrada com sucesso</span>
-								</div>
-							<div class="form-group row ">
-								<label for="nome" class="col-sm-2 control-label">NOME</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="descricao" class="col-sm-2 control-label">DESCRIÇÃO</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" name="descricao"
-										placeholder= "ex: COMENTARIOS"/>
-								</div>
-							</div>
-							
-							<div class="form-group row">
-								<label for="capacidade" class="col-sm-2 control-label">CAPACIDADE</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency"
-										name="capacidade" placeholder="ex: QNT PESSOAS" />
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="datavencimento" class="col-sm-2 control-label">DATA</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency" name="data"
-										placeholder="ex: 10/02/2020" />
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="horario" class="col-sm-2 control-label">HORARIO</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency"
-										name="horario" placeholder="ex: 15:00" />
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="ingresso" class="col-sm-2 control-label">VALOR
-									DO INGRESSO</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency" 
-										name="ingresso" placeholder="ex: R$ 45,00"/>
-								</div>
-							</div>
-							<div class="form-group row ">
-									<label for="casaevento" class="col-sm-2 control-label">CASA DO EVENTO</label> 
-									<div class="col-sm-2">
-									<select class="form-control" name="casaevento">
-									
-										<option th:each="espaco: ${todosEspacoEvento}" th:value="${espaco.nomecasa}"
-										th:text="${espaco.nomecasa}"> </option>
-									
-									</select>
-									</div>	
-								</div>
-						
-
-
-							<button type="submit" class="btn btn-outline-primary">Salvar</button>
-
-						</form>
+					
+					
+					<div class="card-body">
+					<div class="card-body">
+						<div class="clearfix">
+						<h2 class="card-title aw-titulo-card">PESQUISA CASAS</h2>
+						<a class="btn btn-link aw-link-card" href="/espacoeventos">Nova casa</a>
+						</div>
+						</div>
 					</div>
+						
+					<div class="card-body ">
+					<table class="table table-bordered table-striped  correnan">
+					<thead>
+					<tr>
+					
+					<th class="text-center" width="10%">#</th>
+					<th class="text-center " width="40%">NOME</th>
+					<th class="text-center " width="40%">LOCAL</th>
+					<th class="col-md-1"></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="lista: ${casas}">
+						<td class="text-center" th:text="${lista.codigo}"></td>
+						<td class="text-center" th:text="${lista.nomeCasa}"></td>
+						<td class="text-center" th:text="${lista.local}"></td>
+						<th class="text-center"></th>
+					</tr>
+						<tr>
+							<td colspan="6">Nenhuma casa foi encontrada</td>
+						</tr>
+					</tbody>
+					</table>
+					</div>
+
+
+
+
+
 				</div>
 
+
+
+
 			</div>
-
 		</div>
 
-
-
-
-	</div>
-	
-
-
-	<div class="row">
-		<div class="col-12 ">
-			<div class="entry-footer"></div>
-		</div>
 	</div>
 
 
@@ -235,7 +196,6 @@
 		<!-- footer-content-wrapper -->
 	</footer>
 	<!-- site-footer -->
-
 
 
 	<script type='text/javascript' src='/js/jquery.js'></script>

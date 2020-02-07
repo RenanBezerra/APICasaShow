@@ -2,14 +2,18 @@ package br.com.gft.controller;
 
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.gft.model.EspacoEvento;
-import br.com.gft.model.Show;
+import br.com.gft.model.Evento;
 import br.com.gft.model.StatusUsuario;
 import br.com.gft.model.Usuarios;
 import br.com.gft.repository.Casas;
@@ -36,6 +40,8 @@ public class ShowController {
 		
 	}
 	
+	
+	
 	@RequestMapping("/espacoeventos")
 	public ModelAndView EspacoEventos() {
 		ModelAndView mv = new ModelAndView("CadastroEspacoEventos");
@@ -43,9 +49,6 @@ public class ShowController {
 		return mv;
 		
 	}
-	
-	
-	
 	
 	
 	@RequestMapping(value ="/espacoeventos",method = RequestMethod.POST)
@@ -58,19 +61,38 @@ public class ShowController {
 		return mv;
 	}
 
+	@ModelAttribute("todosEspacoEvento")
+	public List<EspacoEvento> todosEspacoEvento(){
+			return casas.findAll();
+	}
+	
+	
+	
+	@RequestMapping("/listacasas")
+	public ModelAndView PesquisaCasas() {
+		List<EspacoEvento> todasCasas = casas.findAll(); 
+		ModelAndView mv = new ModelAndView("PesquisaCasas");
+		mv.addObject("casas", todasCasas);
+		return mv;
+		
+	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping("/shows")
 	public ModelAndView Shows() {
 		ModelAndView mv = new ModelAndView("CadastroShow");
-		
 		return mv;
 	}
 	
 	@RequestMapping(value ="/shows",method = RequestMethod.POST)
-	public ModelAndView salvar(Show show) {
+	public ModelAndView salvar(Evento evento) {
 		// Todo: salvar no banco de dados
 		
-		eventos.save(show);
+		eventos.save(evento);
 		ModelAndView mv = new ModelAndView("CadastroShow");
 		mv.addObject("mensagem", "Show cadastrado com sucesso!!!!!");
 		return mv;
@@ -82,10 +104,14 @@ public class ShowController {
 	}
 	
 	
+	
+	
+	
+	
+	
 	@RequestMapping("/cadastro")
 	public ModelAndView CadastroUsuario() {
 		ModelAndView mv = new ModelAndView("CadastroUsuario");
-		mv.addObject("todosStatusUsuario", StatusUsuario.values());
 		return mv;
 	}
 	
@@ -95,9 +121,18 @@ public class ShowController {
 		lista.save(usuario);
 		ModelAndView mv = new ModelAndView("CadastroUsuario");
 		mv.addObject("mensagem", "Cadastro salvo com sucesso!!!!!");
-		mv.addObject("todosStatusUsuario", StatusUsuario.values());
 		return mv;
 	}
+	
+	
+	
+	
+	@ModelAttribute("todosStatusUsuario")
+	public List<StatusUsuario> todosStatusUsuario(){
+			return Arrays.asList(StatusUsuario.values());
+	}
+	
+	
 	
 	
 	
@@ -111,5 +146,5 @@ public class ShowController {
 		return"HistoricoCliente";
 	}
 	
-
+	
 }
