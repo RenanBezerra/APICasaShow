@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+
 
 
 
@@ -21,15 +23,19 @@ public class EspacoEvento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	
+	@NotNull
+	@NotEmpty
 	private String nomecasa;
 	
-
+	@NotNull(message ="Valor não pode ser nulo")
 	private String local;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy ="casa")
 	private List<Evento> shows;
 
+	
+	
+	
 	
 	public Long getCodigo() {
 		return codigo;

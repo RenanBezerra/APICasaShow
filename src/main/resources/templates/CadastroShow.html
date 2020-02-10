@@ -1,89 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-br" dir="ltr"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" dir="ltr" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<title>Hello World!</title>
-
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
-	rel="stylesheet">
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-<!-- FontAwesome CSS -->
-<link rel="stylesheet" href="/css/fontawesome-all.min.css">
-
-<!-- Swiper CSS -->
-<link rel="stylesheet" href="/css/swiper.min.css">
-
-<!-- Styles -->
-<link rel="stylesheet" href="/style.css">
+<title>Cadastro Shows</title>
 </head>
 
-<body>
-	<header class="site-header">
-		<div class="header-bar">
-			<div class="container-fluid">
-				<div class="row align-items-center">
-					<div class="col-10 col-lg-4">
-						<h1 class="site-branding flex">
-							<a href="#">CADASTRO SHOW</a>
-						</h1>
-					</div>
-
-					<div class="col-2 col-lg-8">
-						<nav class="site-navigation">
-							<div class="hamburger-menu d-lg-none">
-								<span></span> <span></span> <span></span> <span></span>
-							</div>
-							<!-- .hamburger-menu -->
-
-							<ul>
-								<li><a href="#">HOME</a></li>
-								<li><a href="#">CADASTRO DE SHOWS</a></li>
-								<li><a href="#">SHOWS</a></li>
-								<li><a href="#">LOGIN</a></li>
-								<li><a href="#">CONTACT</a></li>
-								<li><a href="#"><i class="fas fa-search"></i></a></li>
-							</ul>
-							<!-- flex -->
-						</nav>
-						<!-- .site-navigation -->
-					</div>
-					<!-- .col-12 -->
-				</div>
-				<!-- .row -->
-			</div>
-			<!-- container-fluid -->
-		</div>
-		<!-- header-bar -->
-	</header>
-	<!-- .site-header -->
-
-
-
-
+<section layout:fragment="conteudo">
 
 
 	<div class="hero-content">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 offset-lg-2 col-lg-10">
+					<h1>Cadastro Casa de shows</h1>
 					<div class="entry-header">
 						<!-- .countdown-holder -->
 
 
-						<form method="POST" >
-						
-							<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}" >
-									<span th:text="${mensagem}">Casa cadastrada com sucesso</span>
-								</div>
+						<form method="POST">
+
+							<div class="alert alert-success"
+								th:if="${!#strings.isEmpty(mensagem)}">
+								<span th:text="${mensagem}">Casa cadastrada com sucesso</span>
+							</div>
 							<div class="form-group row ">
 								<label for="nome" class="col-sm-2 control-label">NOME</label>
 								<div class="col-sm-4">
@@ -95,15 +36,15 @@
 								<label for="descricao" class="col-sm-2 control-label">DESCRIÇÃO</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" name="descricao"
-										placeholder= "ex: COMENTARIOS"/>
+										placeholder="ex: COMENTARIOS" />
 								</div>
 							</div>
-							
+
 							<div class="form-group row">
-								<label for="capacidade" class="col-sm-2 control-label">CAPACIDADE</label>
+								<label for="capacidade" class="col-sm-2 control-label">INGRESSO</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control js-currency"
-										name="capacidade" placeholder="ex: QNT PESSOAS" />
+										name="ingresso" placeholder="ex: QNT PESSOAS" />
 								</div>
 							</div>
 							<div class="form-group row">
@@ -124,22 +65,24 @@
 								<label for="ingresso" class="col-sm-2 control-label">VALOR
 									DO INGRESSO</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency" 
-										name="ingresso" placeholder="ex: R$ 45,00"/>
+									<input type="text" class="form-control js-currency"
+										name="valorIngresso" placeholder="ex: R$ 45,00" />
 								</div>
 							</div>
 							<div class="form-group row ">
-									<label for="casaevento" class="col-sm-2 control-label">CASA DO EVENTO</label> 
-									<div class="col-sm-2">
-									<select class="form-control" name="casaevento">
-									
-										<option th:each="espaco: ${todosEspacoEvento}" th:value="${espaco.nomecasa}"
-										th:text="${espaco.nomecasa}"> </option>
-									
+								<label for="casaevento" class="col-sm-2 control-label">CASA
+									DO EVENTO</label>
+								<div class="col-sm-2">
+									<select class="form-control" name="casaEvento">
+
+										<option th:each="espaco: ${todosEspacoEvento}"
+											th:value="${espaco.nomecasa}" th:text="${espaco.nomecasa}">
+										</option>
+
 									</select>
-									</div>	
 								</div>
-						
+							</div>
+
 
 
 							<button type="submit" class="btn btn-outline-primary">Salvar</button>
@@ -151,100 +94,7 @@
 			</div>
 
 		</div>
-
-
-
-
 	</div>
-	
-
-
-	<div class="row">
-		<div class="col-12 ">
-			<div class="entry-footer"></div>
-		</div>
-	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<footer class="site-footer">
-		<div
-			class="footer-cover-title flex justify-content-center align-items-center">
-			<h2>SUNFEST</h2>
-		</div>
-		<!-- .site-footer -->
-
-		<div class="footer-content-wrapper">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="entry-title">
-							<a href="#">SUNFEST</a>
-						</div>
-						<!-- entry-title -->
-
-						<div class="entry-mail">
-							<a href="#">SAYHELLO@SUNFEST.COM</a>
-						</div>
-						<!-- .entry-mail -->
-
-						<div class="copyright-info">
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;
-							<script>
-								document.write(new Date().getFullYear());
-							</script>
-							All rights reserved | This template is made with <i
-								class="fa fa-heart" aria-hidden="true"></i> by <a
-								href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</div>
-						<!-- copyright-info -->
-
-						<div class="footer-social">
-							<ul class="flex justify-content-center align-items-center">
-								<li><a href="#"><i class="fab fa-pinterest"></i></a></li>
-								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-								<li><a href="#"><i class="fab fa-behance"></i></a></li>
-								<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-							</ul>
-						</div>
-						<!-- footer-social -->
-					</div>
-					<!-- col -->
-				</div>
-				<!-- row -->
-			</div>
-			<!-- container -->
-		</div>
-		<!-- footer-content-wrapper -->
-	</footer>
-	<!-- site-footer -->
-
-
-
-	<script type='text/javascript' src='/js/jquery.js'></script>
-	<script type='text/javascript' src='/js/masonry.pkgd.min.js'></script>
-	<script type='text/javascript' src='/js/jquery.collapsible.min.js'></script>
-	<script type='text/javascript' src='/js/swiper.min.js'></script>
-	<script type='text/javascript' src='/js/jquery.countdown.min.js'></script>
-	<script type='text/javascript' src='/js/circle-progress.min.js'></script>
-	<script type='text/javascript' src='/js/jquery.countTo.min.js'></script>
-	<script type='text/javascript' src='/js/custom.js'></script>
-</body>
+</section>
 </html>
+

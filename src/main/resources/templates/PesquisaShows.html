@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+<head>
+<title>Cadastro Casas</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="hero-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 offset-lg-2 col-lg-10">
+					<div class="entry-header">
+
+
+
+
+						<div class="card-body">
+							<div class="card-body">
+								<div class="clearfix">
+									<h2 class="card-title aw-titulo-card">Shows</h2>
+									<a class="btn btn-link aw-link-card" href="/espacoeventos">Nova
+										casa</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="card-body ">
+							<table class="table table-bordered table-striped  correnan">
+								<thead>
+									<tr>
+										<th class="text-center" width="10%">#</th>
+										<th class="text-center " width="10%">NOME</th>
+										<th class="text-center " width="10%">DESCRICAO</th>
+										<th class="text-center " width="10%">INGRESSO</th>
+										<th class="text-center " width="10%">DATA</th>
+										<th class="text-center " width="10%">HORARIO</th>
+										<th class="text-center " width="10%">VALORINGRESSO</th>
+										<th class="text-center " width="10%">CASA</th>
+										<th class="text-center " width="10%">CASAEVENTO</th>
+										<th class="col-md-1"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="todas: ${eventos}">
+										<td class="text-center" th:text="${todas.id}"></td>
+										<td class="text-center" th:text="${todas.nome}"></td>
+										<td class="text-center" th:text="${todas.descricao}"></td>
+										<td class="text-center" th:text="${todas.ingresso}"></td>
+										<td class="text-center" th:text="${{todas.data}}"></td>
+										<td class="text-center" th:text="${todas.horario}"></td>
+										<td class="text-center" th:text="|R$ ${{todas.valorIngresso}}|"></td>
+										<td class="text-center" th:text="${todas.casa}"></td>
+										<td class="text-center" th:text="${todas.casaEvento}"></td>
+										<th class="text-center"></th>
+									</tr>
+									<tr>
+										<td colspan="10" th:if="${#lists.isEmpty(eventos)}">Nenhuma
+											casa foi encontrada</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+
+					</div>
+
+				</div>
+
+
+
+
+			</div>
+		</div>
+
+	</div>
+
+</section>
+
+</html>

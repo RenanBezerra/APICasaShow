@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,23 +47,25 @@ public class ShowController {
 	@RequestMapping("/espacoeventos")
 	public ModelAndView EspacoEventos() {
 		ModelAndView mv = new ModelAndView("CadastroEspacoEventos");
-		
+		mv.addObject(new EspacoEvento());
 		return mv;
 		
 	}
 	
 	
 	@RequestMapping(value ="/espacoeventos",method = RequestMethod.POST)
-	public ModelAndView salvar(EspacoEvento espacoevento) {
+	public ModelAndView salvar(@Validated EspacoEvento casaEvento,Errors errors) {
 		// Todo: salvar no banco de dados
-		
-		casas.save(espacoevento);
 		ModelAndView mv = new ModelAndView("CadastroEspacoEventos");
+		if(errors.hasErrors()) {
+			return mv;
+		}
+		casas.save(casaEvento);
 		mv.addObject("mensagem", "casa cadastrada com sucesso!!!!!");
 		return mv;
 	}
 
-	@ModelAttribute("todosEspacoEvento")
+	@ModelAttribute("todosEspacoEvento") 
 	public List<EspacoEvento> todosEspacoEvento(){
 			return casas.findAll();
 	}
@@ -89,7 +93,7 @@ public class ShowController {
 	}
 	
 	@RequestMapping(value ="/shows",method = RequestMethod.POST)
-	public ModelAndView salvar(Evento evento) {
+	public ModelAndView salvar(@Validated Evento evento) {
 		// Todo: salvar no banco de dados
 		
 		eventos.save(evento);
@@ -99,8 +103,16 @@ public class ShowController {
 	}
 	
 	@RequestMapping("/listashows")
-	public String ListaShows() {
-		return"Shows";
+	public ModelAndView ListaShows() {
+		
+//		List<EspacoEvento> todasCasas = casas.findAll(); 
+//		ModelAndView mv = new ModelAndView("PesquisaCasas");
+//		mv.addObject("casas", todasCasas);
+//		return mv;
+		List<Evento> todosEventos = eventos.findAll();
+		ModelAndView mv = new ModelAndView("PesquisaShows");
+		mv.addObject("eventos", todosEventos);
+		return mv;
 	}
 	
 	
@@ -116,7 +128,7 @@ public class ShowController {
 	}
 	
 	@RequestMapping(value ="/cadastro",method = RequestMethod.POST)
-	public ModelAndView salvar(Usuarios usuario) {
+	public ModelAndView salvar(@Validated Usuarios usuario) {
 		// Todo: salvar no banco de dados
 		lista.save(usuario);
 		ModelAndView mv = new ModelAndView("CadastroUsuario");
@@ -125,13 +137,21 @@ public class ShowController {
 	}
 	
 	
-	
-	
 	@ModelAttribute("todosStatusUsuario")
 	public List<StatusUsuario> todosStatusUsuario(){
 			return Arrays.asList(StatusUsuario.values());
 	}
 	
+	
+	@RequestMapping("/pesquisausuario")
+	public ModelAndView PesquisaUsuario() {
+		List<Usuarios> todosUsuarios = lista.findAll();
+		ModelAndView mv = new ModelAndView("PesquisaUsuario");
+		mv.addObject("lista", todosUsuarios);
+		
+		
+		return mv;
+	}
 	
 	
 	

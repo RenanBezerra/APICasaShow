@@ -28,7 +28,7 @@ public class Evento {
 	private String descricao;
 	
 
-	private int capacidade;
+	private int ingresso;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
@@ -38,24 +38,21 @@ public class Evento {
 	private String horario;
 
 	@NumberFormat(pattern ="#,##0.00")
-	private BigDecimal ingresso;
+	private BigDecimal valorIngresso;
 	
 	@ManyToOne
 	@JoinColumn(name="casa_codigo")
 	private EspacoEvento casa;
 	
-	private String casaevento;
+	private String casaEvento;
 	
 	
 
 	
 	
-	public String getcasaevento() {
-		return casaevento;
-	}
-	public void setcasaevento(String casaevento) {
-		this.casaevento = casaevento;
-	}
+	
+	
+	
 	
 	
 	public Long getId() {
@@ -76,11 +73,11 @@ public class Evento {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public int getCapacidade() {
-		return capacidade;
+	public int getIngresso() {
+		return ingresso;
 	}
-	public void setCapacidade(int capacidade) {
-		this.capacidade = capacidade;
+	public void setIngresso(int ingresso) {
+		this.ingresso = ingresso;
 	}
 	public Date getData() {
 		return data;
@@ -94,11 +91,11 @@ public class Evento {
 	public void setHorario(String horario) {
 		this.horario = horario;
 	}
-	public BigDecimal getIngresso() {
-		return ingresso;
+	public BigDecimal getValorIngresso() {
+		return valorIngresso;
 	}
-	public void setIngresso(BigDecimal ingresso) {
-		this.ingresso = ingresso;
+	public void setValorIngresso(BigDecimal valorIngresso) {
+		this.valorIngresso = valorIngresso;
 	}
 	public EspacoEvento getCasa() {
 		return casa;
@@ -106,7 +103,12 @@ public class Evento {
 	public void setCasa(EspacoEvento casa) {
 		this.casa = casa;
 	}
-	
+	public String getCasaEvento() {
+		return casaEvento;
+	}
+	public void setCasaEvento(String casaEvento) {
+		this.casaEvento = casaEvento;
+	}
 	
 	
 	
