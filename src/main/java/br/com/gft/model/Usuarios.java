@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,14 +22,20 @@ public class Usuarios {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
+	@NotEmpty(message="Nome é obrigatório")
 	private String primeiroNome;
 	
+	@NotEmpty(message="Sobre nome é obrigatório")
 	private String sobreNome;
 	
+	@NotEmpty(message="Email é obrigatório")
 	private String email;
 	
+	@NotEmpty(message="CPF é obrigatório")
 	private String cpf;
 	
+	@NotNull(message="Data de nascimento é obrigatório")
 	@DateTimeFormat(pattern ="dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
@@ -35,9 +43,10 @@ public class Usuarios {
 	@Enumerated(EnumType.STRING)
 	private StatusUsuario sexo;
 	
-
+	@NotEmpty(message="Nome do Usuario é obrigatório")
 	private String nomeUsuario;
 	
+	@NotEmpty(message="Senha é obrigatório")
 	private String senha;
 	
 	

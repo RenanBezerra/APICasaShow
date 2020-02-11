@@ -23,11 +23,12 @@ public class EspacoEvento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	@NotNull
+
 	@NotEmpty
-	private String nomecasa;
+	private String nomeCasa;
 	
-	@NotNull(message ="Valor não pode ser nulo")
+
+	@NotEmpty(message ="Local é obrigatorio")
 	private String local;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy ="casa")
@@ -50,13 +51,16 @@ public class EspacoEvento {
 	
 
 
-	public String getNomecasa() {
-		return nomecasa;
+
+
+
+	public String getNomeCasa() {
+		return nomeCasa;
 	}
 
 
-	public void setNomecasa(String nomecasa) {
-		this.nomecasa = nomecasa;
+	public void setNomeCasa(String nomeCasa) {
+		this.nomeCasa = nomeCasa;
 	}
 
 

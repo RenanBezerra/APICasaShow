@@ -17,45 +17,44 @@
 					<div class="entry-header">
 
 
-						<form method="POST"action="/cadastro">
-								<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}" >
-									<span th:text="${mensagem}">Casa cadastrada com sucesso</span>
-								</div>
-								<div class="form-group row col-md-6 mb-3">
+						<form method="POST" th:object="${usuarios}">
+								<div layout:insert="Mensagem"></div>
+								
+								<div class="form-group row col-md-6 mb-3" th:classappend="${#fields.hasErrors('primeiroNome')} ? has-error">
 									<label for="validationDefault01">PRIMEIRO NOME</label> 
 									<input
-										type="text" class="form-control" name="primeiroNome"  
+										type="text" class="form-control" th:classappend="${#fields.hasErrors('primeiroNome')} ? is-invalid" th:field="*{primeiroNome}" 
 										placeholder="ex: Mark"  >
 								</div>
-								<div class="form-group row col-md-6 mb-3">
+								<div class="form-group row col-md-6 mb-3" th:classappend="${#fields.hasErrors('sobreNome')} ? has-error">
 									<label for="validationDefault02">SOBRE NOME</label>
-									 <input type="text" class="form-control" name="sobreNome"
+									 <input type="text" class="form-control" th:classappend="${#fields.hasErrors('sobreNome')} ? is-invalid" th:field="*{sobreNome}"
 										placeholder="ex: Bezerra Gomes">
 								</div>
-								<div class="form-group row col-md-6 mb-3">
+								<div class="form-group row col-md-6 mb-3"th:classappend="${#fields.hasErrors('email')} ? has-error">
 									<label for="validationDefaultUsername">EMAIL</label>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="inputGroupPrepend2">@</span>
 										</div>
-										<input type="text" class="form-control" name="email"
+										<input type="text" class="form-control" th:classappend="${#fields.hasErrors('email')} ? is-invalid" th:field="*{email}"
 										placeholder="ex: NOME@gmail.com">
 									</div>
 								</div>
 							
 
 							
-								<div class="form-group row col-md-6 mb-3">
+								<div class="form-group row col-md-6 mb-3"th:classappend="${#fields.hasErrors('cpf')} ? has-error">
 									<label for="validationDefault03">CPF</label>
-									 <input type="text" class="form-control" name="cpf"
+									 <input type="text" class="form-control" th:classappend="${#fields.hasErrors('cpf')} ? is-invalid" th:field="*{cpf}"
 										placeholder="ex: 123.123.123-12">
 								</div>
 								
 								
 								
-								<div class="form-group row col-md-6 mb-3">
+								<div class="form-group row col-md-6 mb-3"th:classappend="${#fields.hasErrors('dataNascimento')} ? has-error">
 									<label for="validationDefault04">DATA DE NASCIMENTO</label> 
-									<input type="text" class="form-control" name="dataNascimento"
+									<input type="text" class="form-control" th:classappend="${#fields.hasErrors('dataNascimento')} ? is-invalid" th:field="*{dataNascimento}"
 										placeholder="ex: 09/09/2009">
 								</div>
 								<div class="form-group row ">
@@ -71,14 +70,14 @@
 								</div>
 								
 							
-								<div class="form-group row col-md-6 mb-3">
+								<div class="form-group row col-md-6 mb-3"th:classappend="${#fields.hasErrors('nomeUsuario')} ? has-error">
 									<label for="validationDefault03">NOME DO USUARIO</label> 
-									<input type="text" class="form-control" name="nomeUsuario"
+									<input type="text" class="form-control"th:classappend="${#fields.hasErrors('nomeUsuario')} ? is-invalid" th:field="*{nomeUsuario}"
 										placeholder="ex: marilda">
 								</div>
-								<div class="form-group row col-md-6 mb-3">
+								<div class="form-group row col-md-6 mb-3"th:classappend="${#fields.hasErrors('senha')} ? has-error">
 									<label for="validationDefault04">SENHA</label> 
-									<input type="text" class="form-control" name="senha"
+									<input type="text" class="form-control"th:classappend="${#fields.hasErrors('senha')} ? is-invalid" th:field="*{senha}"
 										placeholder="ex: ******">
 								</div>
 								

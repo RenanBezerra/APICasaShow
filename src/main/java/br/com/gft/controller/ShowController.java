@@ -69,9 +69,6 @@ public class ShowController {
 	public List<EspacoEvento> todosEspacoEvento(){
 			return casas.findAll();
 	}
-	
-	
-	
 	@RequestMapping("/listacasas")
 	public ModelAndView PesquisaCasas() {
 		List<EspacoEvento> todasCasas = casas.findAll(); 
@@ -80,24 +77,21 @@ public class ShowController {
 		return mv;
 		
 	}
-	
-	
-	
-	
-	
-	
-	@RequestMapping("/shows")
-	public ModelAndView Shows() {
-		ModelAndView mv = new ModelAndView("CadastroShow");
+	@RequestMapping("/evento")
+	public ModelAndView Eventos() {
+		ModelAndView mv = new ModelAndView("CadastroEvento");
+		mv.addObject(new Evento());
 		return mv;
 	}
 	
-	@RequestMapping(value ="/shows",method = RequestMethod.POST)
-	public ModelAndView salvar(@Validated Evento evento) {
+	@RequestMapping(value ="/evento",method = RequestMethod.POST)
+	public ModelAndView salvar(@Validated Evento evento, Errors errors) {
 		// Todo: salvar no banco de dados
-		
+		ModelAndView mv = new ModelAndView("CadastroEvento");
+		if(errors.hasErrors()) {
+			return mv;
+		}
 		eventos.save(evento);
-		ModelAndView mv = new ModelAndView("CadastroShow");
 		mv.addObject("mensagem", "Show cadastrado com sucesso!!!!!");
 		return mv;
 	}
@@ -115,23 +109,21 @@ public class ShowController {
 		return mv;
 	}
 	
-	
-	
-	
-	
-	
-	
 	@RequestMapping("/cadastro")
 	public ModelAndView CadastroUsuario() {
 		ModelAndView mv = new ModelAndView("CadastroUsuario");
+		mv.addObject(new Usuarios());
 		return mv;
 	}
 	
 	@RequestMapping(value ="/cadastro",method = RequestMethod.POST)
-	public ModelAndView salvar(@Validated Usuarios usuario) {
-		// Todo: salvar no banco de dados
-		lista.save(usuario);
+	public ModelAndView salvar(@Validated Usuarios usuarios, Errors errors) {
 		ModelAndView mv = new ModelAndView("CadastroUsuario");
+		// Todo: salvar no banco de dados
+		if(errors.hasErrors()) {
+			return mv;
+		}
+		lista.save(usuarios);
 		mv.addObject("mensagem", "Cadastro salvo com sucesso!!!!!");
 		return mv;
 	}

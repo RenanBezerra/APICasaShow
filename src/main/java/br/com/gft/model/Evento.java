@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
@@ -23,26 +25,34 @@ public class Evento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nome;
 	
-	private String descricao;
+	@NotEmpty(message ="Nome do Evento é obrigatorio")
+	private String nomeEvento;
 	
 
+	@NotEmpty(message ="Descrição é obrigatorio")
+	private String descricao;
+	@NotNull
 	private int ingresso;
 	
+	
+	@NotNull(message="Data é obrigatório")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date data;
 	
-	
+	@NotEmpty(message ="Horario é obrigatorio")
 	private String horario;
 
-	@NumberFormat(pattern ="#,##0.00")
+	
+	@NotNull
+	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal valorIngresso;
 	
 	@ManyToOne
 	@JoinColumn(name="casa_codigo")
 	private EspacoEvento casa;
+	
 	
 	private String casaEvento;
 	
@@ -61,11 +71,12 @@ public class Evento {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNome() {
-		return nome;
+	
+	public String getNomeEvento() {
+		return nomeEvento;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeEvento(String nomeEvento) {
+		this.nomeEvento = nomeEvento;
 	}
 	public String getDescricao() {
 		return descricao;

@@ -4,68 +4,64 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 <head>
-<title>Cadastro Shows</title>
+<title>Cadastro Evento</title>
 </head>
 
 <section layout:fragment="conteudo">
-
-
 	<div class="hero-content">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 offset-lg-2 col-lg-10">
-					<h1>Cadastro Casa de shows</h1>
+					<h1>Eventos</h1>
 					<div class="entry-header">
 						<!-- .countdown-holder -->
 
 
-						<form method="POST">
+						<form method="POST" th:object="${evento}" >
 
-							<div class="alert alert-success"
-								th:if="${!#strings.isEmpty(mensagem)}">
-								<span th:text="${mensagem}">Casa cadastrada com sucesso</span>
-							</div>
-							<div class="form-group row ">
-								<label for="nome" class="col-sm-2 control-label">NOME</label>
+							<div layout:insert="Mensagem"></div>
+
+							<div class="form-group row" th:classappend="${#fields.hasErrors('nomeEvento')} ? has-error">
+								<label for="nomeEvento" class="col-sm-2 control-label">NOME</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" name="nome"
-										placeholder="ex: NOME">
+									<input type="text" class="form-control"th:classappend="${#fields.hasErrors('nomeEvento')} ? is-invalid"
+										name="nomeEvento" placeholder="ex: NOME">
 								</div>
 							</div>
-							<div class="form-group row">
+							<div class="form-group row"th:classappend="${#fields.hasErrors('descricao')} ? has-error">
 								<label for="descricao" class="col-sm-2 control-label">DESCRIÇÃO</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" name="descricao"
+									<input type="text" class="form-control"th:classappend="${#fields.hasErrors('descricao')} ? is-invalid" name="descricao"
 										placeholder="ex: COMENTARIOS" />
 								</div>
 							</div>
 
-							<div class="form-group row">
-								<label for="capacidade" class="col-sm-2 control-label">INGRESSO</label>
+							<div class="form-group row"th:classappend="${#fields.hasErrors('ingresso')} ? has-error">
+								<label for="ingresso" class="col-sm-2 control-label">INGRESSO</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency"
+									<input type="text" class="form-control js-currency"th:classappend="${#fields.hasErrors('ingresso')} ? is-invalid"
 										name="ingresso" placeholder="ex: QNT PESSOAS" />
 								</div>
 							</div>
-							<div class="form-group row">
+							<div class="form-group row"th:classappend="${#fields.hasErrors('data')} ? has-error">
 								<label for="datavencimento" class="col-sm-2 control-label">DATA</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency" name="data"
+									<input type="text" class="form-control js-currency"th:classappend="${#fields.hasErrors('data')} ? is-invalid" name="data"
 										placeholder="ex: 10/02/2020" />
 								</div>
 							</div>
-							<div class="form-group row">
+							<div class="form-group row"th:classappend="${#fields.hasErrors('horario')} ? has-error">
 								<label for="horario" class="col-sm-2 control-label">HORARIO</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency"
+									<input type="text" class="form-control js-currency"th:classappend="${#fields.hasErrors('horario')} ? is-invalid"
 										name="horario" placeholder="ex: 15:00" />
 								</div>
 							</div>
-							<div class="form-group row">
+							<div class="form-group row"th:classappend="${#fields.hasErrors('valorIngresso')} ? has-error">
 								<label for="ingresso" class="col-sm-2 control-label">VALOR
 									DO INGRESSO</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency"
+									<input type="text" class="form-control js-currency"th:classappend="${#fields.hasErrors('valorIngresso')} ? is-invalid"
 										name="valorIngresso" placeholder="ex: R$ 45,00" />
 								</div>
 							</div>
@@ -76,7 +72,7 @@
 									<select class="form-control" name="casaEvento">
 
 										<option th:each="espaco: ${todosEspacoEvento}"
-											th:value="${espaco.nomecasa}" th:text="${espaco.nomecasa}">
+											th:value="${espaco.nomeCasa}" th:text="${espaco.nomeCasa}">
 										</option>
 
 									</select>

@@ -4,6 +4,9 @@
 .flex {
     display: flex;
 }
+.has-error{
+		color:red;
+	}
 
 .correnan {
 	color:white;
