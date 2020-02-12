@@ -42,7 +42,13 @@
 										<td class="text-center" th:text="${todas.codigo}"></td>
 										<td class="text-center" th:text="${todas.nomeCasa}"></td>
 										<td class="text-center" th:text="${todas.local}"></td>
-										<th class="text-center"></th>
+										<td class="text-center">
+											<a class="btn btn-link btn-xs" th:href="@{/editarCasa/{codigo}(codigo=${todas.codigo})}">
+												<span
+									class=""><img src="/images/images.editar2.png" width="30"
+										height="30"></span>
+											</a>
+										</td>
 									</tr>
 									<tr>
 										<td colspan="6" th:if="${#lists.isEmpty(casas)}">Nenhuma

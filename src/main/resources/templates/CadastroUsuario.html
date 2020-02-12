@@ -17,8 +17,10 @@
 					<div class="entry-header">
 
 
-						<form method="POST" th:object="${usuarios}">
+						<form method="POST" action="/cadastro" th:object="${usuarios}">
 								<div layout:insert="Mensagem"></div>
+								<div class="card-body">
+								<input type="hidden" th:field="*{id}"/>
 								
 								<div class="form-group row col-md-6 mb-3" th:classappend="${#fields.hasErrors('primeiroNome')} ? has-error">
 									<label for="validationDefault01">PRIMEIRO NOME</label> 
@@ -85,6 +87,7 @@
 							
 							
 							<button class="btn btn-primary" type="submit">Enviar</button>
+							</div>
 						</form>
 						<!-- .entry-meta-date -->
 					</div>

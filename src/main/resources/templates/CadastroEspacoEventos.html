@@ -20,6 +20,8 @@
 						<form method="POST" action="/espacoeventos" th:object="${espacoEvento}">
 							<div layout:insert="Mensagem"></div>
 							
+							<div class="card-body">
+							<input type="hidden" th:field="*{codigo}"/> 
 							<div class="form-group row" th:classapend="${#fields.hasErrors('nomeCasa')} ? has-error">
 								<label for="validationDefault01" class="col-sm-2 control-label">NOME</label>
 								<div class="col-sm-6">
@@ -37,7 +39,7 @@
 							</div>
 
 							<button type="submit" class="btn btn-outline-primary">Salvar</button>
-
+							</div>
 						</form>
 					</div>
 				</div>

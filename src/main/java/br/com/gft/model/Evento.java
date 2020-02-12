@@ -1,6 +1,7 @@
 package br.com.gft.model;
 
 
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -32,6 +33,8 @@ public class Evento {
 
 	@NotEmpty(message ="Descrição é obrigatorio")
 	private String descricao;
+	
+	
 	@NotNull
 	private int ingresso;
 	

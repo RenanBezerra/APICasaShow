@@ -30,7 +30,7 @@
 							<table class="table table-bordered table-striped  correnan">
 								<thead>
 									<tr>
-										<th class="text-center" width="10%">#</th>
+										<th class="text-center" width="5%">#</th>
 										<th class="text-center " width="10%">PRIMEIRO NOME</th>
 										<th class="text-center " width="10%">SOBRE NOME</th>
 										<th class="text-center " width="10%">EMAIL</th>
@@ -39,7 +39,7 @@
 										<th class="text-center " width="10%">SEXO</th>
 										<th class="text-center " width="10%">NOME USUARIO</th>
 										<th class="text-center " width="10%">SENHA</th>
-										<th class="col-md-1"></th>
+										<th class="col-md-1" ></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -53,11 +53,16 @@
 										<td class="text-center" th:text="${todas.sexo}"></td>
 										<td class="text-center" th:text="${todas.nomeUsuario}"></td>
 										<td class="text-center" th:text="${todas.senha}"></td>
-										<th class="text-center"></th>
+										<td class="text-center">
+										<a class="btn btn-link btn-xs" th:href="@{/editarUsuario/{codigo}(codigo=${todas.id})}">
+												<span class=""><img src="/images/images.editar2.png" width="30"
+										height="30"></span>
+											</a>
+											</td>
 									</tr>
 									<tr>
-										<td colspan="10" th:if="${#lists.isEmpty(lista)}">Nenhuma
-											casa foi encontrada</td>
+										<td colspan="10" th:if="${#lists.isEmpty(lista)}">Nenhum
+											usuario foi encontrada</td>
 									</tr>
 								</tbody>
 							</table>

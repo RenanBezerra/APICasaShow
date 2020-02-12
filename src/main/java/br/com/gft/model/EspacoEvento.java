@@ -23,8 +23,8 @@ public class EspacoEvento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-
-	@NotEmpty
+	@NotNull
+	@NotEmpty(message="Nome da casa é obrigatorio")
 	private String nomeCasa;
 	
 
