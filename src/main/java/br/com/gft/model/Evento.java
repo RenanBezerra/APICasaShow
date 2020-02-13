@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +37,7 @@ public class Evento {
 	private String descricao;
 	
 	
-	@NotNull
+	@NotNull(message="Ingresso é obrigatório")
 	private int ingresso;
 	
 	
@@ -53,11 +55,11 @@ public class Evento {
 	private BigDecimal valorIngresso;
 	
 	@ManyToOne
-	@JoinColumn(name="casa_codigo")
+	@JoinColumn(name="casa_codigo",nullable=false)
 	private EspacoEvento casa;
 	
-	
-	private String casaEvento;
+	@Enumerated(EnumType.STRING)
+	private StatusGenero genero;
 	
 	
 
@@ -117,15 +119,16 @@ public class Evento {
 	public void setCasa(EspacoEvento casa) {
 		this.casa = casa;
 	}
-	public String getCasaEvento() {
-		return casaEvento;
+	
+	
+	
+	
+	public StatusGenero getGenero() {
+		return genero;
 	}
-	public void setCasaEvento(String casaEvento) {
-		this.casaEvento = casaEvento;
+	public void setGenero(StatusGenero genero) {
+		this.genero = genero;
 	}
-	
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -17,72 +17,98 @@
 						<!-- .countdown-holder -->
 
 
-						<form method="POST" th:object="${evento}" >
+						<form method="POST" action="/evento" th:object="${evento}">
 
 							<div layout:insert="Mensagem"></div>
+							
+							<div class="card-body">
+								<input type="hidden" th:field="*{id}">
 
-							<div class="form-group row" th:classappend="${#fields.hasErrors('nomeEvento')} ? has-error">
-								<label for="nomeEvento" class="col-sm-2 control-label">NOME</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control"th:classappend="${#fields.hasErrors('nomeEvento')} ? is-invalid"
-										th:field="*{nomeEvento}" placeholder="ex: NOME">
+								<div class="form-group row"
+									th:classappend="${#fields.hasErrors('nomeEvento')} ? has-error">
+									<label for="nomeEvento" class="col-sm-2 control-label">NOME</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control"
+											th:classappend="${#fields.hasErrors('nomeEvento')} ? is-invalid"
+											th:field="*{nomeEvento}" placeholder="ex: NOME">
+									</div>
 								</div>
-							</div>
-							<div class="form-group row"th:classappend="${#fields.hasErrors('descricao')} ? has-error">
-								<label for="descricao" class="col-sm-2 control-label">DESCRIÇÃO</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control"th:classappend="${#fields.hasErrors('descricao')} ? is-invalid" th:field="*{descricao}"
-										placeholder="ex: COMENTARIOS" />
+								<div class="form-group row"
+									th:classappend="${#fields.hasErrors('descricao')} ? has-error">
+									<label for="descricao" class="col-sm-2 control-label">DESCRIÇÃO</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control"
+											th:classappend="${#fields.hasErrors('descricao')} ? is-invalid"
+											th:field="*{descricao}" placeholder="ex: COMENTARIOS" />
+									</div>
 								</div>
-							</div>
 
-							<div class="form-group row"th:classappend="${#fields.hasErrors('ingresso')} ? has-error">
-								<label for="ingresso" class="col-sm-2 control-label">INGRESSO</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency"th:classappend="${#fields.hasErrors('ingresso')} ? is-invalid"
-										th:field="*{ingresso}" placeholder="ex: QNT PESSOAS" />
+								<div class="form-group row"
+									th:classappend="${#fields.hasErrors('ingresso')} ? has-error">
+									<label for="ingresso" class="col-sm-2 control-label">INGRESSO</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control js-currency"
+											th:classappend="${#fields.hasErrors('ingresso')} ? is-invalid"
+											th:field="*{ingresso}" placeholder="ex: QNT PESSOAS" />
+									</div>
 								</div>
-							</div>
-							<div class="form-group row"th:classappend="${#fields.hasErrors('data')} ? has-error">
-								<label for="data" class="col-sm-2 control-label">DATA</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency"th:classappend="${#fields.hasErrors('data')} ? is-invalid" th:field="*{data}"
-										placeholder="ex: 10/02/2020" />
+								<div class="form-group row"
+									th:classappend="${#fields.hasErrors('data')} ? has-error">
+									<label for="data" class="col-sm-2 control-label">DATA</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control js-currency"
+											th:classappend="${#fields.hasErrors('data')} ? is-invalid"
+											th:field="*{data}" placeholder="ex: 10/02/2020" />
+									</div>
 								</div>
-							</div>
-							<div class="form-group row"th:classappend="${#fields.hasErrors('horario')} ? has-error">
-								<label for="horario" class="col-sm-2 control-label">HORARIO</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency"th:classappend="${#fields.hasErrors('horario')} ? is-invalid"
-										th:field="*{horario}" placeholder="ex: 15:00" />
+								<div class="form-group row"
+									th:classappend="${#fields.hasErrors('horario')} ? has-error">
+									<label for="horario" class="col-sm-2 control-label">HORARIO</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control js-currency"
+											th:classappend="${#fields.hasErrors('horario')} ? is-invalid"
+											th:field="*{horario}" placeholder="ex: 15:00" />
+									</div>
 								</div>
-							</div>
-							<div class="form-group row"th:classappend="${#fields.hasErrors('valorIngresso')} ? has-error">
-								<label for="valorIngresso" class="col-sm-2 control-label">VALOR
-									DO INGRESSO</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control js-currency"th:classappend="${#fields.hasErrors('valorIngresso')} ? is-invalid"
-										th:field="*{valorIngresso}" placeholder="ex: R$ 45,00" />
+								<div class="form-group row"
+									th:classappend="${#fields.hasErrors('valorIngresso')} ? has-error">
+									<label for="valorIngresso" class="col-sm-2 control-label">VALOR
+										DO INGRESSO</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control js-currency"
+											th:classappend="${#fields.hasErrors('valorIngresso')} ? is-invalid"
+											th:field="*{valorIngresso}" placeholder="ex: R$ 45,00" />
+									</div>
 								</div>
-							</div>
-							<div class="form-group row ">
-								<label for="casaEvento" class="col-sm-2 control-label">CASA
-									DO EVENTO</label>
-								<div class="col-sm-2">
-									<select class="form-control" th:field="*{casaEvento}">
+								<div class="form-group row ">
+									<label for="casaEvento" class="col-sm-2 control-label">CASA
+										DO EVENTO</label>
+									<div class="col-sm-2">
+										<select class="form-control" name="casa">
 
-										<option th:each="espaco: ${todosEspacoEvento}"
-											th:value="${espaco.nomeCasa}" th:text="${espaco.nomeCasa}">
-										</option>
+											<option th:each="espaco: ${todosEspacoEvento}"
+												th:value="${espaco.codigo}" th:text="${espaco.nomeCasa}">
+											</option>
 
-									</select>
+										</select>
+									</div>
 								</div>
+								<div class="form-group row ">
+									<label for="genero" class="col-sm-2 control-label">GENERO
+									</label>
+									<div class="col-sm-2">
+										<select class="form-control" name="genero">
+
+											<option th:each="genero: ${todosGeneros}"
+												th:value="${genero}" th:text="${genero}"></option>
+
+										</select>
+									</div>
+								</div>
+
+
+								<button type="submit" class="btn btn-outline-primary">Salvar</button>
 							</div>
-
-
-
-							<button type="submit" class="btn btn-outline-primary">Salvar</button>
-
 						</form>
 					</div>
 				</div>

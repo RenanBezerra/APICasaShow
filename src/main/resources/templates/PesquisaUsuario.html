@@ -20,8 +20,7 @@
 							<div class="card-body">
 								<div class="clearfix">
 									<h2 class="card-title aw-titulo-card">Usuarios</h2>
-									<a class="btn btn-link aw-link-card" href="/espacoeventos">Nova
-										casa</a>
+									
 								</div>
 							</div>
 						</div>
@@ -58,6 +57,10 @@
 												<span class=""><img src="/images/images.editar2.png" width="30"
 										height="30"></span>
 											</a>
+											<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal">
+												<span class=""><img src="/images/excluir2.png" width="30"
+										height="30"></span>
+											</a>
 											</td>
 									</tr>
 									<tr>
@@ -76,6 +79,7 @@
 			</div>
 
 		</div>
+		<div layout:insert="DialogoConfirmacaoExclusao"></div>
 	</div>
 </section>
 

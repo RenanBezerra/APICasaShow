@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.gft.model.EspacoEvento;
 import br.com.gft.model.Evento;
+import br.com.gft.model.StatusGenero;
 import br.com.gft.model.StatusUsuario;
 import br.com.gft.model.Usuarios;
 import br.com.gft.repository.Casas;
@@ -121,6 +122,18 @@ public class ShowController {
 		ModelAndView mv = new ModelAndView("PesquisaShows");
 		mv.addObject("eventos", todosEventos);
 		return mv;
+	}
+	@RequestMapping("/editarEvento/{codigo}")
+	public ModelAndView edicaoEvento(@PathVariable("codigo") Long id) {
+		ModelAndView mv = new ModelAndView(CADASTRO_EVENTO);
+		Optional<Evento> evento = eventos.findById(id);
+		mv.addObject(evento.get());
+		return mv;
+	}
+	
+	@ModelAttribute("todosGeneros") 
+	public List<StatusGenero> todosGeneros(){
+			return Arrays.asList(StatusGenero.values());
 	}
 	
 	

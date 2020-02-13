@@ -20,15 +20,14 @@
 						<div class="card-body">
 							<div class="card-body">
 								<div class="clearfix">
-									<h2 class="card-title aw-titulo-card">Casas de show</h2>
-									<a class="btn btn-link aw-link-card" href="/espacoeventos">Nova
-										casa</a>
+									<h2 class="card-title aw-titulo-card">Casas de Eventos</h2>
+									
 								</div>
 							</div>
 						</div>
 
 						<div class="card-body ">
-							<table class="table table-bordered table-striped  correnan">
+							<table class="table table-bordered table-striped correnan">
 								<thead>
 									<tr>
 										<th class="text-center" width="10%">#</th>
@@ -44,8 +43,11 @@
 										<td class="text-center" th:text="${todas.local}"></td>
 										<td class="text-center">
 											<a class="btn btn-link btn-xs" th:href="@{/editarCasa/{codigo}(codigo=${todas.codigo})}">
-												<span
-									class=""><img src="/images/images.editar2.png" width="30"
+												<span class=""><img src="/images/images.editar2.png" width="30"
+										height="30"></span>
+											</a>
+											<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal">
+												<span class=""><img src="/images/excluir2.png" width="30"
 										height="30"></span>
 											</a>
 										</td>
@@ -61,7 +63,6 @@
 
 
 
-
 					</div>
 
 				</div>
@@ -69,6 +70,7 @@
 
 			</div>
 		</div>
+	<div layout:insert="DialogoConfirmacaoExclusao"></div>
 
 	</div>
 </section>

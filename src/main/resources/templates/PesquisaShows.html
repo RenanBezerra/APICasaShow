@@ -21,9 +21,8 @@
 						<div class="card-body">
 							<div class="card-body">
 								<div class="clearfix">
-									<h2 class="card-title aw-titulo-card">Shows</h2>
-									<a class="btn btn-link aw-link-card" href="/espacoeventos">Nova
-										casa</a>
+									<h2 class="card-title aw-titulo-card">Eventos</h2>
+									
 								</div>
 							</div>
 						</div>
@@ -40,7 +39,7 @@
 										<th class="text-center " width="10%">HORARIO</th>
 										<th class="text-center " width="10%">VALORINGRESSO</th>
 										<th class="text-center " width="10%">CASA</th>
-										<th class="text-center " width="10%">CASAEVENTO</th>
+										<th class="text-center " width="10%">GÊNERO</th>
 										<th class="col-md-1"></th>
 									</tr>
 								</thead>
@@ -53,9 +52,18 @@
 										<td class="text-center" th:text="${{todas.data}}"></td>
 										<td class="text-center" th:text="${todas.horario}"></td>
 										<td class="text-center" th:text="|R$ ${{todas.valorIngresso}}|"></td>
-										<td class="text-center" th:text="${todas.casa}"></td>
-										<td class="text-center" th:text="${todas.casaEvento}"></td>
-										<th class="text-center"></th>
+										<td class="text-center" th:text="${todas.casa.nomeCasa}"></td>
+										<td class="text-center" th:text="${todas.genero}"></td>
+										<td class="text-center">
+										<a class="btn btn-link btn-xs" th:href="@{/editarEvento/{codigo}(codigo=${todas.id})}">
+												<span class=""><img src="/images/images.editar2.png" width="30"
+										height="30"></span>
+											</a>
+											<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal">
+												<span class=""><img src="/images/excluir2.png" width="30"
+										height="30"></span>
+											</a>
+											</td>
 									</tr>
 									<tr>
 										<td colspan="10" th:if="${#lists.isEmpty(eventos)}">Nenhuma
@@ -75,7 +83,7 @@
 
 			</div>
 		</div>
-
+	<div layout:insert="DialogoConfirmacaoExclusao"></div>
 	</div>
 
 </section>
