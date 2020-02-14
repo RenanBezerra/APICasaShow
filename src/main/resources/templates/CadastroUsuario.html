@@ -18,7 +18,8 @@
 
 
 						<form method="POST" action="/cadastro" th:object="${usuarios}">
-								<div layout:insert="Mensagem"></div>
+								<div layout:insert="MensagemGeral"></div>
+								<div layout:insert="MensagemErro"></div>
 								<div class="card-body">
 								<input type="hidden" th:field="*{id}"/>
 								

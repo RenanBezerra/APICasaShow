@@ -19,7 +19,8 @@
 
 						<form method="POST" action="/evento" th:object="${evento}">
 
-							<div layout:insert="Mensagem"></div>
+							<div layout:insert="MensagemGeral"></div>
+							<div layout:insert="MensagemErro"></div>
 							
 							<div class="card-body">
 								<input type="hidden" th:field="*{id}">

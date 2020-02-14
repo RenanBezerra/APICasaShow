@@ -63,7 +63,6 @@ public class ShowController {
 	@RequestMapping(value ="/espacoeventos",method = RequestMethod.POST)
 	public String salvar(@Validated EspacoEvento casaEvento,Errors errors,RedirectAttributes attributes) {
 		// Todo: salvar no banco de dados
-	
 		if(errors.hasErrors()) {
 			return CADASTRO_CASA;
 		}
@@ -92,6 +91,15 @@ public class ShowController {
 		mv.addObject(casaEvento.get());
 		return mv;
 	}
+	
+	@RequestMapping(value="/listacasas/{codigo}", method = RequestMethod.POST)
+	public String excluirCasa(@PathVariable Long codigo, RedirectAttributes attributes) {
+		casas.deleteById(codigo);
+		
+		attributes.addFlashAttribute("mensagem", "Titulo excluido com sucesso!");
+		return "redirect:/listacasas";
+	}
+	
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	@RequestMapping("/evento")
@@ -134,6 +142,14 @@ public class ShowController {
 	@ModelAttribute("todosGeneros") 
 	public List<StatusGenero> todosGeneros(){
 			return Arrays.asList(StatusGenero.values());
+	}
+	
+	@RequestMapping(value="/listashows/{codigo}", method = RequestMethod.POST)
+	public String excluirEvento(@PathVariable Long id) {
+		eventos.deleteById(id);
+		
+		
+		return "redirect:/listashows";
 	}
 	
 	

@@ -31,7 +31,7 @@ public class EspacoEvento {
 	@NotEmpty(message ="Local é obrigatorio")
 	private String local;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy ="casa",orphanRemoval=true)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy ="casa")
 	private List<Evento> eventos;
 
 	
