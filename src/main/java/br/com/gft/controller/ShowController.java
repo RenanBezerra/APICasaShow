@@ -96,7 +96,7 @@ public class ShowController {
 	public String excluirCasa(@PathVariable Long codigo, RedirectAttributes attributes) {
 		casas.deleteById(codigo);
 		
-		attributes.addFlashAttribute("mensagem", "Titulo excluido com sucesso!");
+		attributes.addFlashAttribute("mensagem", "Casa excluida com sucesso!");
 		return "redirect:/listacasas";
 	}
 	
@@ -144,13 +144,20 @@ public class ShowController {
 			return Arrays.asList(StatusGenero.values());
 	}
 	
-	@RequestMapping(value="/listashows/{codigo}", method = RequestMethod.POST)
-	public String excluirEvento(@PathVariable Long id) {
+	@RequestMapping(value="/listashows/{id}",method = RequestMethod.POST)
+	public String excluirEvento(@PathVariable Long id,RedirectAttributes attributes) {
 		eventos.deleteById(id);
-		
-		
+		attributes.addFlashAttribute("mensagem", "Evento excluido com sucesso!");
 		return "redirect:/listashows";
 	}
+	
+//	@RequestMapping(value="/listashows/{codigo}", method = RequestMethod.POST)
+//	public String excluirEvento(@PathVariable Long id) {
+//		eventos.deleteById(id);
+//		
+//		
+//		return "redirect:/listashows";
+//	}
 	
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	

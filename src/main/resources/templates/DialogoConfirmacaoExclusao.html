@@ -6,7 +6,7 @@
 
 <div class="modal fade" id="confirmacaoExclusaoModal" tabindex="-1" data-keyboard="false" data-backdrop="static">
 	<div class="modal-dialog">
-		<form action="/listacasas" method="POST">
+		<form th:attr="data-url-base='/listacasas/'" method="POST">
 			<input type="hidden" name="_method" value="DELETE"/>
 			<div class="modal-content">
 				<div class="modal-header">
@@ -14,7 +14,7 @@
 					<h4 class="modal-title correnan2">Voce tem ceteza?</h4>
 				</div>
 				<div class="modal-body ">
-					<span class="correnan2">Tem certeza que deseja apagar o titulo?</span>
+					<span class="correnan2">Tem certeza que deseja apagar a casa?</span>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>

@@ -59,7 +59,8 @@
 												<span class=""><img src="/images/images.editar2.png" width="30"
 										height="30"></span>
 											</a>
-											<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalEvento"  >
+											<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoEvento"
+											th:attr="data-codigo=${todas.id}, data-descricao=${todas.nomeEvento}">
 												<span class=""><img src="/images/excluir2.png" width="30"
 										height="30"></span>
 											</a>
@@ -73,7 +74,7 @@
 							</table>
 						</div>
 
-
+					<div layout:insert="ConfirmacaoExclusaoEvento"></div>
 					</div>
 
 				</div>
@@ -83,7 +84,6 @@
 
 			</div>
 		</div>
-	<div layout:insert="DialogoConfirmacaoExclusaoEvento"></div>
 	</div>
 
 </section>
