@@ -16,8 +16,8 @@
 					<div class="entry-header">
 						<!-- .countdown-holder -->
 
-
-						<form method="POST" action="/evento" th:object="${evento}">
+	
+						<form method="POST" action="/evento" th:object="${evento}" th:if="${!#lists.isEmpty(todosEspacoEvento)}">
 
 							<div layout:insert="MensagemGeral"></div>
 							<div layout:insert="MensagemErro"></div>
@@ -111,13 +111,21 @@
 								<button type="submit" class="btn btn-outline-primary">Salvar</button>
 							</div>
 						</form>
+						<div class="container" style="margin-top: 200px;"  th:if="${#lists.isEmpty(todosEspacoEvento)}">
+		<h4> Para registrar um evento, é necessario ter pelo menos uma Casa de Show registrado. </h4>
+		<h6 style="text-align:center;"> Em 10 segundos, a página será redirecionado para a anterior!  </h6>
+		<meta http-equiv="refresh" content="10;url=/espacoeventos" />
+	</div>
 					</div>
 				</div>
+
 
 			</div>
 
 		</div>
 	</div>
+	
 </section>
+
 </html>
 

@@ -143,6 +143,10 @@ public class ShowController {
 	public List<StatusGenero> todosGeneros(){
 			return Arrays.asList(StatusGenero.values());
 	}
+	@ModelAttribute("todosEventosShows") 
+	public List<Evento> todosEventosShows(){
+			return eventos.findAll();
+	}
 	
 	@RequestMapping(value="/listashows/{id}",method = RequestMethod.POST)
 	public String excluirEvento(@PathVariable Long id,RedirectAttributes attributes) {
