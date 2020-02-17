@@ -17,7 +17,7 @@
                         <h2>Hello world!</h2>
 
                         <div class="entry-meta-date">
-                            06.28.018
+                            17.02.2020
                         </div><!-- .entry-meta-date -->
                     </div><!-- .entry-header -->
 
@@ -48,8 +48,8 @@
             <div class="row">
                 <div class="col-12 ">
                     <div class="entry-footer">
-                        <a href="#" class="btn">Buy Tickets</a>
-                        <a href="#" class="btn current">See Lineup</a>
+                        <a href="#tickets" class="btn">Buy Tickets</a>
+                        <a href="#lineup" class="btn current">See Lineup</a>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     <div class="lineup-artists-headline">
                         <div class="entry-title">
                             <p>JUST THE BEST</p>
-                            <h2>The Lineup Artists-Headliners</h2>
+                            <h2 id="lineup">The Lineup Artists-Headliners</h2>
                         </div><!-- entry-title -->
 
                         <div class="lineup-artists">
@@ -336,15 +336,48 @@
             </div><!-- .next-event-slider-wrap -->
         </div><!-- homepage-next-events -->
 
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="home-page-last-news">
             <div class="container">
-                <div class="header">
+                <div class="header ">
                     <div class="entry-title">
                         <p>JUST THE BEST</p>
-                        <h2>Our Last News</h2>
+                        <h2 id="tickets">Our Last News</h2>
                     </div><!-- entry-title -->
                 </div><!-- header -->
-
+							<form method="POST" action="/" th:object="${evento}">
+								<div class="table-responsive">
+							  	<h5 class="card-header" ></h5>
+							 	<div class="list-group-item " th:each="eventos: ${todosEventosShows}">
+							   	<div class="clearfix renanAlign">
+							   	<img  th:src="@{/images/{codigo}.png(codigo=${eventos.genero})}" width="120" height="120">
+							   	
+							   	 
+							    </div>
+							    <h5 class="card-title correnan2"></h5>
+							    
+							    <p class="card-text text-center correnan2 textRenan" th:text="|Show ${eventos.nomeEvento}|">oi</p>
+							    <p class="card-text text-center correnan2" th:text="|Valor do ingresso R$ ${eventos.ingresso}|">oi</p>
+							     
+							    <p class="card-text text-center correnan2" th:text="|Data do show ${eventos.data}|">oi</p>
+							    <p class="card-text text-center correnan2" th:text="|Horario do evento ${eventos.horario}|">oi</p>	
+							    
+							    <a href="#" class="btn btn-primary botaoRenan">Adicionar no carrinho</a>
+							 	</div>
+							</div>
+							
+						</form>
                 <div class="home-page-last-news-wrap">
                     <div class="row">
                         <div class="col-12 col-md-6">

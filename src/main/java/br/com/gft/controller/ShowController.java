@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +26,8 @@ import br.com.gft.model.Usuarios;
 import br.com.gft.repository.Casas;
 import br.com.gft.repository.Eventos;
 import br.com.gft.repository.ListaUsuarios;
+import br.com.gft.service.CadastroCasaService;
+import br.com.gft.service.CadastroEventoService;
 
 
 @Controller
@@ -43,14 +46,21 @@ public class ShowController {
 	@Autowired
 	private ListaUsuarios lista;
 	
+	@Autowired
+	private CadastroEventoService cadastroEventoService;
 	
+	@Autowired
+	private CadastroCasaService cadastroCasaService;
+	
+	
+///////////////////////////////////////////////	
 	
 	@RequestMapping("/home")
 	public String Home() {
 		return"Home";
 		
 	}
-	
+	////////////////////////////////// CASAS
 	@RequestMapping("/espacoeventos")
 	public ModelAndView EspacoEventos() {
 		ModelAndView mv = new ModelAndView(CADASTRO_CASA);
@@ -60,18 +70,18 @@ public class ShowController {
 	}
 	
 	
-	@RequestMapping(value ="/espacoeventos",method = RequestMethod.POST)
+	@RequestMapping(value ="/espacoeventos",method = RequestMethod.POST)////salvar casa
 	public String salvar(@Validated EspacoEvento casaEvento,Errors errors,RedirectAttributes attributes) {
 		// Todo: salvar no banco de dados
 		if(errors.hasErrors()) {
 			return CADASTRO_CASA;
 		}
-		casas.save(casaEvento);
+		cadastroCasaService.salvar(casaEvento);
 		attributes.addFlashAttribute("mensagem", "casa cadastrada com sucesso!!!!!");
 		return "redirect:/espacoeventos";
 	}
 
-	@ModelAttribute("todosEspacoEvento") 
+	@ModelAttribute("todosEspacoEvento") ///lista da casa
 	public List<EspacoEvento> todosEspacoEvento(){
 			return casas.findAll();
 	}
@@ -84,7 +94,7 @@ public class ShowController {
 		
 	}
 	
-	@RequestMapping("/editarCasa/{codigo}")
+	@RequestMapping("/editarCasa/{codigo}") //////editar casa
 	public ModelAndView edicao(@PathVariable("codigo") Long codigo) {
 		ModelAndView mv = new ModelAndView(CADASTRO_CASA);
 		Optional<EspacoEvento> casaEvento = casas.findById(codigo);
@@ -92,16 +102,16 @@ public class ShowController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/listacasas/{codigo}", method = RequestMethod.POST)
+	@RequestMapping(value="/listacasas/{codigo}", method = RequestMethod.POST) ////////exclui casa
 	public String excluirCasa(@PathVariable Long codigo, RedirectAttributes attributes) {
-		casas.deleteById(codigo);
+		cadastroCasaService.excluirCasa(codigo);
 		
 		attributes.addFlashAttribute("mensagem", "Casa excluida com sucesso!");
 		return "redirect:/listacasas";
 	}
 	
 	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////////////////////////////EVENTOS
 	@RequestMapping("/evento")
 	public ModelAndView Eventos() {
 		ModelAndView mv = new ModelAndView(CADASTRO_EVENTO);
@@ -109,15 +119,20 @@ public class ShowController {
 		return mv;
 	}
 	
-	@RequestMapping(value ="/evento",method = RequestMethod.POST)
+	@RequestMapping(value ="/evento",method = RequestMethod.POST)//////////SALVA EVENTO
 	public String salvar(@Validated Evento evento, Errors errors, RedirectAttributes attributes) {
 		// Todo: salvar no banco de dados	
 		if(errors.hasErrors()) {
 			return CADASTRO_EVENTO;
 		}
-		eventos.save(evento);
-		attributes.addFlashAttribute("mensagem", "Show cadastrado com sucesso!!!!!");
-		return "redirect:/evento";
+		try {
+			cadastroEventoService.salvar(evento);
+			attributes.addFlashAttribute("mensagem", "Show cadastrado com sucesso!!!!!");
+			return "redirect:/evento";			
+		} catch (IllegalArgumentException e) {
+			errors.rejectValue("data",null, e.getMessage());
+			return CADASTRO_EVENTO;
+		}
 	}
 	
 	@RequestMapping("/listashows")
@@ -131,7 +146,7 @@ public class ShowController {
 		mv.addObject("eventos", todosEventos);
 		return mv;
 	}
-	@RequestMapping("/editarEvento/{codigo}")
+	@RequestMapping("/editarEvento/{codigo}")////////////////EDITA EVENTO
 	public ModelAndView edicaoEvento(@PathVariable("codigo") Long id) {
 		ModelAndView mv = new ModelAndView(CADASTRO_EVENTO);
 		Optional<Evento> evento = eventos.findById(id);
@@ -148,9 +163,9 @@ public class ShowController {
 			return eventos.findAll();
 	}
 	
-	@RequestMapping(value="/listashows/{id}",method = RequestMethod.POST)
+	@RequestMapping(value="/listashows/{id}",method = RequestMethod.POST)//////////////ECLUI EVENTO
 	public String excluirEvento(@PathVariable Long id,RedirectAttributes attributes) {
-		eventos.deleteById(id);
+		cadastroEventoService.excluirEvento(id);
 		attributes.addFlashAttribute("mensagem", "Evento excluido com sucesso!");
 		return "redirect:/listashows";
 	}
@@ -164,7 +179,7 @@ public class ShowController {
 //	}
 	
 	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	USUARIO
 	
 	
 	
@@ -175,7 +190,7 @@ public class ShowController {
 		return mv;
 	}
 	
-	@RequestMapping(value ="/cadastro",method = RequestMethod.POST)
+	@RequestMapping(value ="/cadastro",method = RequestMethod.POST)/////// SALVA USUARIO
 	public String salvar(@Validated Usuarios usuarios, Errors errors, RedirectAttributes attributes) {
 		
 		// Todo: salvar no banco de dados
@@ -205,7 +220,7 @@ public class ShowController {
 		return mv;
 	}
 	
-	@RequestMapping("/editarUsuario/{codigo}")
+	@RequestMapping("/editarUsuario/{codigo}")//////////// EDITA USUARIO
 	public ModelAndView edicaoUsuario(@PathVariable("codigo") Long id) {
 		ModelAndView mv = new ModelAndView(CADASTRO_USUARIO);
 		Optional<Usuarios> usuarios = lista.findById(id);
@@ -213,9 +228,29 @@ public class ShowController {
 		return mv;
 	}
 	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////CARRINHO
+	
+//	@ModelAttribute("todasCompras")
+//	static List<TodasCompras> todasCompras(){
+//			return Arrays.asList(TodasCompras.values());
+//	}
 	
 	
+	
+	@RequestMapping("/carrinho")
+	public String Compra() {
+		return"Carrinho";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////SECURITY	
 	@RequestMapping("/login")
 	public String Login() {
 		return"Login";

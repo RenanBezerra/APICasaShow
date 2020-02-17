@@ -48,7 +48,7 @@
 									th:classappend="${#fields.hasErrors('ingresso')} ? has-error">
 									<label for="ingresso" class="col-sm-2 control-label">INGRESSO</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control js-currency"
+										<input type="text" class="form-control"
 											th:classappend="${#fields.hasErrors('ingresso')} ? is-invalid"
 											th:field="*{ingresso}" placeholder="ex: QNT PESSOAS" />
 									</div>
@@ -57,16 +57,18 @@
 									th:classappend="${#fields.hasErrors('data')} ? has-error">
 									<label for="data" class="col-sm-2 control-label">DATA</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control js-currency"
+										<input type="text" class="form-control "
 											th:classappend="${#fields.hasErrors('data')} ? is-invalid"
-											th:field="*{data}" placeholder="ex: 10/02/2020" />
+											th:field="*{data}" placeholder="ex: 10/02/2020"
+											data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" 
+											data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
 									</div>
 								</div>
 								<div class="form-group row"
 									th:classappend="${#fields.hasErrors('horario')} ? has-error">
 									<label for="horario" class="col-sm-2 control-label">HORARIO</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control js-currency"
+										<input type="text" class="form-control "
 											th:classappend="${#fields.hasErrors('horario')} ? is-invalid"
 											th:field="*{horario}" placeholder="ex: 15:00" />
 									</div>
@@ -113,7 +115,7 @@
 						</form>
 						<div class="container" style="margin-top: 200px;"  th:if="${#lists.isEmpty(todosEspacoEvento)}">
 		<h4> Para registrar um evento, é necessario ter pelo menos uma Casa de Show registrado. </h4>
-		<h6 style="text-align:center;"> Em 10 segundos, a página será redirecionado para a anterior!  </h6>
+		<h6 style="text-align:center;"> Em 10 segundos, a página será redirecionado para Cadastro de Casas!  </h6>
 		<meta http-equiv="refresh" content="10;url=/espacoeventos" />
 	</div>
 					</div>

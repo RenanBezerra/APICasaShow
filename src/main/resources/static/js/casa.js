@@ -18,3 +18,7 @@ $('#confirmacaoExclusaoModal').on('show.bs.modal',function(event){
 	modal.find('.modal-body span').html('Tem certeza que deseja excluir a casa <strong>' + descricaoCasa +'</strong>?');
 	
 });
+$(function(){
+	$('[rel="tooltip"]').tooltip();
+	$('.js-currency').maskMoney({decimal: ',', thousands: '.', allowzero: true});
+});

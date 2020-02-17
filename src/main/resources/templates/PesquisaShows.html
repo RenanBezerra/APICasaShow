@@ -27,7 +27,7 @@
 							</div>
 						</div>
 						<div layout:insert="MensagemGeral"></div>
-						<div class="card-body ">
+						<div class="table-responsive ">
 							<table class="table table-bordered table-striped  correnan">
 								<thead>
 									<tr>
@@ -55,12 +55,14 @@
 										<td class="text-center" th:text="${todas.casa.nomeCasa}"></td>
 										<td class="text-center" th:text="${todas.genero}"></td>
 										<td class="text-center">
-										<a class="btn btn-link btn-xs" th:href="@{/editarEvento/{codigo}(codigo=${todas.id})}">
+										<a class="btn btn-link btn-xs" th:href="@{/editarEvento/{codigo}(codigo=${todas.id})}"
+										title="Editar" rel="tooltip" data-placement="top">
 												<span class=""><img src="/images/images.editar2.png" width="30"
 										height="30"></span>
 											</a>
 											<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoEvento"
-											th:attr="data-codigo=${todas.id}, data-descricao=${todas.nomeEvento}">
+											th:attr="data-codigo=${todas.id}, data-descricao=${todas.nomeEvento}"
+											title="Excluir" rel="tooltip" data-placement="top">
 												<span class=""><img src="/images/excluir2.png" width="30"
 										height="30"></span>
 											</a>

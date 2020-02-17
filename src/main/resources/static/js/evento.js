@@ -15,4 +15,9 @@ $('#confirmacaoExclusaoEvento').on('show.bs.modal', function(event){
 	modal.find('.modal-body span').html('Tem certeza que deseja excluir o evento <strong>' + descricaoEvento +'</strong>?');
 	
 });
+
+$(function(){
+	$('[rel="tooltip"]').tooltip();
+	$('.js-currency').maskMoney({decimal: ',', thousands: '.', allowzero: true});
+});
 	
