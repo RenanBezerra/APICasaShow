@@ -20,29 +20,27 @@
 						<!-- .countdown-holder -->
 
 
-											
-						<form method="POST" action="/" th:object="${evento}">
-							<div class="card">
-							  <h5 class="card-header" ></h5>
-							 	<div class="list-group-item" th:each="eventos: ${todosEventosShows}">
+									
+						<div th:object="${listcart}">
+								<div class="table-responsive">
+							  	<h5 class="card-header" ></h5>
+							 	<div class="list-group-item " th:each="listcart: ${listcart}">
 							   	<div class="clearfix renanAlign">
-							   	 <img src="/images/ROCK.png" width="120" height="120"
-										class="" alt="">
+							   	
+							   	
+							   	 
 							    </div>
 							    <h5 class="card-title correnan2"></h5>
 							    
-							    <p class="card-text correnan2" th:text="|Show ${eventos.nomeEvento}|">oi</p>
-							    <p class="card-text correnan2" th:text="|Valor do ingresso R$ ${eventos.ingresso}|">oi</p>
+							    <h1 >oi</h1>
+							    	
 							    
-							    <p class="card-text correnan2" th:text="|Data do show ${eventos.data}|">oi</p>
-							    <p class="card-text correnan2" th:text="|Horario do evento ${eventos.horario}|">oi</p>
-							    <p class="card-text correnan2" th:text="|Genero ${eventos.genero}|">oi</p>	
-							    <a href="#" class="btn btn-primary botaoRenan">Adicionar no carrinho</a>
+							    <a  class="btn btn-primary botaoRenan">Adicionar no carrinho</a>
 							 	</div>
 							</div>
-							
-						</form>
 						
+                             </div>
+                             
 						 </div>
 					</div>
 						</div>
@@ -51,18 +49,10 @@
 						
 						
 					</div>
-
 				</div>
 
 
-			</div>
-
-
-
-
-		</div>
-	</div>
-
+	
 
 
 </section>

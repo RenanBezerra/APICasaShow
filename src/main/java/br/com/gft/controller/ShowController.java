@@ -2,12 +2,12 @@ package br.com.gft.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.gft.model.Carrinho;
 import br.com.gft.model.EspacoEvento;
 import br.com.gft.model.Evento;
+import br.com.gft.model.Produto;
 import br.com.gft.model.StatusGenero;
 import br.com.gft.model.StatusUsuario;
 import br.com.gft.model.Usuarios;
@@ -163,6 +165,8 @@ public class ShowController {
 			return eventos.findAll();
 	}
 	
+	
+	
 	@RequestMapping(value="/listashows/{id}",method = RequestMethod.POST)//////////////ECLUI EVENTO
 	public String excluirEvento(@PathVariable Long id,RedirectAttributes attributes) {
 		cadastroEventoService.excluirEvento(id);
@@ -235,19 +239,26 @@ public class ShowController {
 //			return Arrays.asList(TodasCompras.values());
 //	}
 	
+//	@ModelAttribute("todosEventosShows") 
+//	public List<Evento> todosEventosShows(){
+//			return eventos.findAll();
+//	}
+	
+//	@ModelAttribute("todasCompras")
+//	public List<Evento> todasCompras(){
+//		return Arrays.asList();
+//	}
+	
+	
 	
 	
 	@RequestMapping("/carrinho")
-	public String Compra() {
-		return"Carrinho";
+	public ModelAndView carrinho() {
+		ModelAndView mv = new ModelAndView("Carrinho");
+		mv.addObject("listcarrinho", Carrinho.getListcarrinho());
+		mv.addObject(new Carrinho());
+		return mv;
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////SECURITY	
