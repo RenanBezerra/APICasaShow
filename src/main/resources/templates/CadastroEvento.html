@@ -87,7 +87,7 @@
 									<label for="casaEvento" class="col-sm-2 control-label">CASA
 										DO EVENTO</label>
 									<div class="col-sm-2">
-										<select class="form-control" name="casa">
+										<select class="form-control" th:field="*{casa}">
 
 											<option th:each="espaco: ${todosEspacoEvento}"
 												th:value="${espaco.codigo}" th:text="${espaco.nomeCasa}">
@@ -100,7 +100,7 @@
 									<label for="genero" class="col-sm-2 control-label">GENERO
 									</label>
 									<div class="col-sm-2">
-										<select class="form-control" name="genero">
+										<select class="form-control" th:field="*{genero}" >
 
 											<option th:each="genero: ${todosGeneros}"
 												th:value="${genero}" th:text="${genero}"></option>

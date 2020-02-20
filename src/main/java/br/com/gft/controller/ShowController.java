@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.gft.model.Carrinho;
+
 import br.com.gft.model.EspacoEvento;
 import br.com.gft.model.Evento;
-import br.com.gft.model.Produto;
+
 import br.com.gft.model.StatusGenero;
 import br.com.gft.model.StatusUsuario;
 import br.com.gft.model.Usuarios;
@@ -234,33 +234,11 @@ public class ShowController {
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////CARRINHO
 	
-//	@ModelAttribute("todasCompras")
-//	static List<TodasCompras> todasCompras(){
-//			return Arrays.asList(TodasCompras.values());
-//	}
-	
-//	@ModelAttribute("todosEventosShows") 
-//	public List<Evento> todosEventosShows(){
-//			return eventos.findAll();
-//	}
-	
-//	@ModelAttribute("todasCompras")
-//	public List<Evento> todasCompras(){
-//		return Arrays.asList();
-//	}
+
 	
 	
 	
-	
-	@RequestMapping("/carrinho")
-	public ModelAndView carrinho() {
-		ModelAndView mv = new ModelAndView("Carrinho");
-		mv.addObject("listcarrinho", Carrinho.getListcarrinho());
-		mv.addObject(new Carrinho());
-		return mv;
-	}
-	
-	
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////SECURITY	
 	@RequestMapping("/login")
 	public String Login() {

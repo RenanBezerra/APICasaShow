@@ -376,7 +376,7 @@
 							    <p class="card-text text-center correnan2" th:text="|Data do show ${eventos.data}|">oi</p>
 							    <p class="card-text text-center correnan2" th:text="|Horario do evento ${eventos.horario}|">oi</p>	
 							    
-							    <a th:href="@{/carrinho/{id_evento}(id_evento=${eventos.id})}" class="btn btn-primary botaoRenan">Adicionar no carrinho</a>
+							    <a th:href="@{/adicionarCarrinho/{id}(id=${eventos.id})}" class="btn btn-primary botaoRenan">Adicionar no carrinho</a>
 							 	</div>
 							</div>
 							
