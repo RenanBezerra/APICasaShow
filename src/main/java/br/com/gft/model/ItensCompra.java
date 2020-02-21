@@ -31,9 +31,9 @@ public class ItensCompra implements Serializable {
 
 	private Integer quantidade;
 
-	private BigDecimal valorUnitario;
+	private Double valorUnitario=0.;
 	
-	private BigDecimal valorTotal;
+	private Double valorTotal=0.;
 
 	public Long getId() {
 		return id;
@@ -71,22 +71,27 @@ public class ItensCompra implements Serializable {
 		this.quantidade = quantidade;
 	}
 
-	public BigDecimal getValorUnitario() {
+	public Double getValorUnitario() {
 		return valorUnitario;
 	}
 
-	public void setValorUnitario(BigDecimal valorUnitario) {
+	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
 
-	public BigDecimal getValorTotal() {
+	public Double getValorTotal() {
 		return valorTotal;
 	}
 
-	public void setValorTotal(BigDecimal valorTotal) {
+	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 
 
+	
+	
+	}
 
-}
+
+
+

@@ -56,7 +56,7 @@ public class Evento {
 	@DecimalMin(value = "0.01", message = "Valornão pode ser menro que 0,01")
 	@DecimalMax(value = "9999999999.99", message = "Valor não pode ser maior que 9.999.999,99")
 	@NumberFormat(pattern = "#,##0.00")
-	private BigDecimal valorIngresso;
+	private Double valorIngresso;
 	
 	@ManyToOne
 	@JoinColumn(name="casa_codigo",nullable=false)
@@ -111,10 +111,11 @@ public class Evento {
 	public void setHorario(String horario) {
 		this.horario = horario;
 	}
-	public BigDecimal getValorIngresso() {
+	
+	public Double getValorIngresso() {
 		return valorIngresso;
 	}
-	public void setValorIngresso(BigDecimal valorIngresso) {
+	public void setValorIngresso(Double valorIngresso) {
 		this.valorIngresso = valorIngresso;
 	}
 	public EspacoEvento getCasa() {
