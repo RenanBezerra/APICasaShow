@@ -4,7 +4,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 <head>
-<title>Carrinho</title>
+<title>Finalizar a compra</title>
 </head>
 
 <section layout:fragment="conteudo">
@@ -19,7 +19,20 @@
 					<div class="entry-header">
 						<!-- .countdown-holder -->
 
-
+						<div class="col-12 correnan"><h1>Infornações do Usuario</h1></div>
+						
+						<div class="col-6 correnan">
+							<select class="form-control">
+								<option value="Cartão de credito">Cartão de Crédito</option>
+								<option value="Cartão de debito">Cartão de Débito</option>
+								<option value="Boleto">Boleto</option>
+								<option value="Transferência">Transferência</option>
+								
+							</select>
+						
+						</div>
+						
+						
 							<div class="table-responsive">
                 <table class="table table-striped correnan">
                     <thead>
@@ -40,16 +53,11 @@
                             <td>Em estoque</td>
                             <td><span th:text="${item.quantidade}"></span> &nbsp; &nbsp;
                             
-                            <a class="btn btn-sm btn-success" th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id},acao=${1})}"><i class="fa fa-plus"></i></a>&nbsp; &nbsp;
-                            
-                            <a  class="btn btn-sm btn-success" th:if="${item.quantidade}>1"   th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id},acao=${0})}"><i class="fa fa-minus"></i></a>
-                            
                             
                             </td>
                             <td class="text-right" th:text="| R$ ${{item.valorUnitario}}|"></td>
                             <td class="text-right" th:text="| R$ ${{item.valorTotal}}|"></td>
                             <td class="text-right">
-                            <a  class="btn btn-sm btn-danger" th:href="@{/removerProduto/{id}(id=${item.produto.id})}"><i class="fa fa-trash"></i></a>
                             
                             	
                              </td>
@@ -81,12 +89,11 @@
 		  <div class="col mb-2">
             <div class="row">
                 <div class="col-sm-12  col-md-6">
-                 <a  class="btn btn-block btn-light" th:href="home" role="button">Continue Comprando</a>
+                 
                     
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
-                <a  class="btn btn-lg btn-block btn-success text-uppercase" th:href="finalizar" role="button">Finalizar a Compra</a>
-                
+                    <button class="btn btn-lg btn-block btn-success text-uppercase">Confirmar a Compra</button>
                 </div>
             </div>
         </div>		
