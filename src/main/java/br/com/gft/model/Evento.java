@@ -2,7 +2,7 @@ package br.com.gft.model;
 
 
 
-import java.math.BigDecimal;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -23,6 +23,9 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Entity
 public class Evento {
 
@@ -36,19 +39,23 @@ public class Evento {
 	
 
 	@NotEmpty(message ="Descrição é obrigatorio")
+	@JsonInclude(Include.NON_NULL)
 	private String descricao;
 	
 	
 	@NotNull(message="Ingresso é obrigatório")
+	@JsonInclude(Include.NON_NULL)
 	private int ingresso;
 	
 	
 	@NotNull(message="Data é obrigatório")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
+	@JsonInclude(Include.NON_NULL)
 	private Date data;
 	
 	@NotEmpty(message ="Horario é obrigatorio")
+	@JsonInclude(Include.NON_NULL)
 	private String horario;
 
 	
@@ -56,13 +63,16 @@ public class Evento {
 	@DecimalMin(value = "0.01", message = "Valornão pode ser menro que 0,01")
 	@DecimalMax(value = "9999999999.99", message = "Valor não pode ser maior que 9.999.999,99")
 	@NumberFormat(pattern = "#,##0.00")
+	@JsonInclude(Include.NON_NULL)
 	private Double valorIngresso;
 	
 	@ManyToOne
 	@JoinColumn(name="casa_codigo",nullable=false)
+	@JsonInclude(Include.NON_NULL)
 	private EspacoEvento casa;
 	
 	@Enumerated(EnumType.STRING)
+	@JsonInclude(Include.NON_NULL)
 	private StatusGenero genero;
 	
 	

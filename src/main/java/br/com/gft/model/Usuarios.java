@@ -15,6 +15,9 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Entity
 public class Usuarios {
 	
@@ -27,26 +30,33 @@ public class Usuarios {
 	private String primeiroNome;
 	
 	@NotEmpty(message="Sobre nome é obrigatório")
+	@JsonInclude(Include.NON_NULL)
 	private String sobreNome;
 	
 	@NotEmpty(message="Email é obrigatório")
+	@JsonInclude(Include.NON_NULL)
 	private String email;
 	
 	@NotEmpty(message="CPF é obrigatório")
+	@JsonInclude(Include.NON_NULL)
 	private String cpf;
 	
 	@NotNull(message="Data de nascimento é obrigatório")
 	@DateTimeFormat(pattern ="dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
+	@JsonInclude(Include.NON_NULL)
 	private Date dataNascimento;
 	
 	@Enumerated(EnumType.STRING)
+	@JsonInclude(Include.NON_NULL)
 	private StatusUsuario sexo;
 	
 	@NotEmpty(message="Nome do Usuario é obrigatório")
+	@JsonInclude(Include.NON_NULL)
 	private String nomeUsuario;
 	
 	@NotEmpty(message="Senha é obrigatório")
+	@JsonInclude(Include.NON_NULL)
 	private String senha;
 	
 	

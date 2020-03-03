@@ -11,6 +11,10 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 
 
 
@@ -27,11 +31,12 @@ public class EspacoEvento {
 	@NotEmpty(message="Nome da casa é obrigatorio")
 	private String nomeCasa;
 	
-
+	@JsonInclude(Include.NON_NULL)
 	@NotEmpty(message ="Local é obrigatorio")
 	private String local;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy ="casa")
+	@JsonIgnore
 	private List<Evento> eventos;
 
 	
