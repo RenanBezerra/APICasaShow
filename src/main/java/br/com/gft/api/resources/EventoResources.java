@@ -18,23 +18,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.gft.api.service.EventosService;
 import br.com.gft.model.Evento;
-import br.com.gft.repository.Eventos;
 
 @RestController
 @RequestMapping("/api/evento")
 public class EventoResources {
 
 	@Autowired
-	private Eventos eventos;
+	private EventosService eventoService;
 	
 	@GetMapping
 	public ResponseEntity<List<Evento>> listar(){
-		return ResponseEntity.status(HttpStatus.OK).body(eventos.findAll());
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listar());
 	}
+	
 	@PostMapping
 	public ResponseEntity<Void> salvar(@RequestBody Evento evento ) {
-		evento = eventos.save(evento);
+		evento = eventoService.salvar(evento);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(evento.getId()).toUri();
@@ -43,22 +44,17 @@ public class EventoResources {
 	}
 	@GetMapping(value= "/{id}")
 	public ResponseEntity<Optional<Evento>> buscar (@PathVariable("id") Long id){
-		Optional<Evento> evento = eventos.findById(id);
+		Optional<Evento> evento = eventoService.buscar(id);
 		
-		if(evento.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		}
+		
 		return ResponseEntity.status(HttpStatus.OK).body(evento);
 		
 	}
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void>deletar(@PathVariable("id")Long id) {
-		try {
-			eventos.deleteById(id);
-		} catch(EmptyResultDataAccessException e) {
-			return ResponseEntity.notFound().build();
-			
-		}
+	
+			eventoService.deletar(id);
+		
 		return ResponseEntity.noContent().build();
 			
 		}
@@ -67,7 +63,7 @@ public class EventoResources {
 	public ResponseEntity<Void>atualizar(@RequestBody Evento evento,
 			@PathVariable("id")Long id) {
 		evento.setId(id);
-		eventos.save(evento);
+		eventoService.atualizar(evento);
 	
 		return ResponseEntity.noContent().build();
 	}

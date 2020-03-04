@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,23 +18,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
+import br.com.gft.api.service.UsuariosService;
 import br.com.gft.model.Usuarios;
-import br.com.gft.repository.ListaUsuarios;
 
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuariosResources {
 
 	@Autowired
-	private ListaUsuarios lista;
+	private UsuariosService usuariosService;
 	
 	@GetMapping
 	public ResponseEntity<List<Usuarios>> listar(){
-		return ResponseEntity.status(HttpStatus.OK).body(lista.findAll());
+		return ResponseEntity.status(HttpStatus.OK).body(usuariosService.listar());
 	}
 	@PostMapping
 	public ResponseEntity<Void> salvar(@RequestBody Usuarios usuarios ) {
-		usuarios = lista.save(usuarios);
+		usuarios = usuariosService.salvar(usuarios);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(usuarios.getId()).toUri();
@@ -44,32 +45,28 @@ public class UsuariosResources {
 	
 	
 	@GetMapping(value="/{id}")
-	public ResponseEntity<Optional<Usuarios>> buscar (@PathVariable("id") Long id){
-		Optional<Usuarios> usuarios = lista.findById(id);
-
-		if(usuarios.isEmpty()) {
-				return ResponseEntity.notFound().build();
-				
-		}
+	public ResponseEntity<?> buscar (@PathVariable("id") Long id){
+	
+			
+		Optional<Usuarios> usuarios = usuariosService.buscar(id);
 		return ResponseEntity.status(HttpStatus.OK).body(usuarios);
 	}
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void>deletar(@PathVariable("id")Long id) {
-		try {
-			lista.deleteById(id);
-		} catch(EmptyResultDataAccessException e){
-			return ResponseEntity.notFound().build();
-		}
+			usuariosService.deletar(id);
 		return ResponseEntity.noContent().build();
 			
 		}
+	
 	@PutMapping(value="/{id}")
 	public ResponseEntity<Void> atualizar(@RequestBody Usuarios usuarios,
 			@PathVariable("id")Long id) {
 		usuarios.setId(id);
-		lista.save(usuarios);
+		
+			usuariosService.atualizar(usuarios);
 		
 		return ResponseEntity.noContent().build();
+		
 	}
 	
 	
