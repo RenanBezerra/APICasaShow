@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,6 +50,10 @@ public class CarrinhoControle {
 		mv.addObject("compra", compra);
 		mv.addObject("listaItens", itensCompra);
 		return mv;
+		
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		
+//		compra.setUsuarios(auth.getName()); colocar na ora de implementar a compra
 	}
 
 	@GetMapping("/alterarQuantidade/{id}/{acao}")

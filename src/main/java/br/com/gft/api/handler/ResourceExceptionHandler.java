@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+
 import br.com.gft.api.exceptions.EspacoEventoExistenteException;
 import br.com.gft.api.exceptions.EspacoEventoNaoEncontradoException;
 import br.com.gft.api.exceptions.EventoExistenteException;
@@ -160,6 +162,20 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 		 
 	}
+	@ExceptionHandler(InvalidFormatException.class)
+	public ResponseEntity<DetalhesErro> handleInvalidFormatException
+								(InvalidFormatException e, HttpServletRequest request){
+		
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(410l);
+		erro.setTitulo("Requisição invalida, para salvar verifique o campo do valorIngresso com . ponto");
+		erro.setMensagemDesenvolvedor("http://erros.socialbooks.com/400");
+		erro.setTimestamp(System.currentTimeMillis());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+		 
+	}
+	
 	
 	
 	

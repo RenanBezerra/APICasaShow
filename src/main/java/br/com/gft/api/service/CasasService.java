@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.gft.api.exceptions.EspacoEventoExistenteException;
@@ -18,6 +19,7 @@ public class CasasService {
 
 	@Autowired
 	private Casas casas;
+	private String nomeCasa;
 	
 		public List<EspacoEvento> listar(){
 			return casas.findAll();
@@ -64,5 +66,23 @@ public class CasasService {
 			buscar(casaEvento.getCodigo());
 		}
 		
+		public List<EspacoEvento> listarCrescente(){
+			return casas.findAll(Sort.by(Sort.Direction.ASC,"nomeCasa"));
+		}
+		
+		public List<EspacoEvento> listarDecrescente(){
+			return casas.findAll(Sort.by(Sort.Direction.DESC,"nomeCasa"));
+		}
+		
+		public Optional<EspacoEvento> buscarNome(String nome) {
+			Optional<EspacoEvento> casaEvento =casas.findByNomeCasa(nomeCasa);
+			
+			if(casaEvento.get().getNomeCasa()==null) {
+				throw new EspacoEventoNaoEncontradoException("A casa não pode ser encontrada.");
+				
+				
+			}
+			return casaEvento;
+		}
 		
 }

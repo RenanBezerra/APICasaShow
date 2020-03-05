@@ -15,6 +15,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import io.swagger.annotations.ApiModelProperty;
+
 
 
 
@@ -27,10 +29,12 @@ public class EspacoEvento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
+	@ApiModelProperty(example="Espaço Festas")
 	@NotNull
 	@NotEmpty(message="Nome da casa é obrigatorio")
 	private String nomeCasa;
 	
+	@ApiModelProperty(example="Av Pinheiros")
 	@JsonInclude(Include.NON_NULL)
 	@NotEmpty(message ="Local é obrigatorio")
 	private String local;

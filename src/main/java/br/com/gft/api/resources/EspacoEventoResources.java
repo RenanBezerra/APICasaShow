@@ -22,7 +22,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.gft.api.service.CasasService;
 import br.com.gft.model.EspacoEvento;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
+@Api(tags = "Espaço-Evento")
 @RestController
 @RequestMapping("/api")
 public class EspacoEventoResources {
@@ -30,6 +34,7 @@ public class EspacoEventoResources {
 	@Autowired
 	private CasasService casasService;
 
+	@ApiOperation("Lista as casas")
 	@GetMapping(produces = {
 			MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE
@@ -37,8 +42,9 @@ public class EspacoEventoResources {
 	public ResponseEntity<List<EspacoEvento>> listar() {
 		return ResponseEntity.status(HttpStatus.OK).body(casasService.listar());
 	}
+	@ApiOperation("Salva as casas")
 	@PostMapping
-	public ResponseEntity<Void> salvar(@Valid@RequestBody EspacoEvento casaEvento) {
+	public ResponseEntity<Void> salvar(@ApiParam(name ="corpo",value="Representação de um novo Espaço Evento")@Valid@RequestBody EspacoEvento casaEvento) {
 		 casaEvento = casasService.salvar(casaEvento);
 		 
 		 URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -46,9 +52,9 @@ public class EspacoEventoResources {
 	
 		 return ResponseEntity.created(uri).build();
 	}
-	
+	@ApiOperation("Lista a casa")
 	@GetMapping(value= "/{id}")
-	public ResponseEntity<Optional<EspacoEvento>> buscar(@PathVariable("id") Long id) {
+	public ResponseEntity<Optional<EspacoEvento>> buscar(@ApiParam(value ="ID de um Espaco_Evento",example="1")@PathVariable("id") Long id) {
 		Optional<EspacoEvento> espacoEvento = casasService.buscar(id);
 		
 
@@ -56,9 +62,9 @@ public class EspacoEventoResources {
 		}
 	
 	
-	
+	@ApiOperation("Deleta a casa ")
 	@DeleteMapping(value="/{id}")
-	public ResponseEntity<Void>deletar(@PathVariable("id")Long id) {
+	public ResponseEntity<Void>deletar(@ApiParam(value ="ID de um Espaco_Evento",example="1")@PathVariable("id")Long id) {
 		
 			casasService.deletar(id);
 			
@@ -66,9 +72,9 @@ public class EspacoEventoResources {
 	}
 	
 	
-	
+	@ApiOperation("Atualiza a casa")
 	@PutMapping(value="/{id}")
-	public ResponseEntity<Void>atualizar(@RequestBody EspacoEvento casaEvento,
+	public ResponseEntity<Void>atualizar(@ApiParam(name ="corpo",value="Representação de um Espaço Evento com os novos dados")@RequestBody EspacoEvento casaEvento,
 			@PathVariable("id")Long codigo) {
 		casaEvento.setCodigo(codigo);
 		
@@ -78,5 +84,24 @@ public class EspacoEventoResources {
 		return ResponseEntity.noContent().build();
 		
 		
+	}
+	
+	@ApiOperation("Lista as casas em ordem alfabética crescente por nome")
+	@GetMapping(value="/asc",produces = {
+			MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE
+	})
+	public ResponseEntity<List<EspacoEvento>> listarCrescente() {
+		return ResponseEntity.status(HttpStatus.OK).body(casasService.listarCrescente());
+	}
+	
+	
+	@ApiOperation("Lista as casas em ordem alfabética decrescente por nome ")
+	@GetMapping(value="/desc", produces = {
+			MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE
+	})
+	public ResponseEntity<List<EspacoEvento>> listarDecrescente() {
+		return ResponseEntity.status(HttpStatus.OK).body(casasService.listarDecrescente());
 	}
 }

@@ -18,6 +18,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 public class Usuarios {
 	
@@ -25,36 +27,44 @@ public class Usuarios {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@ApiModelProperty(example="Maria")
 	@NotNull
 	@NotEmpty(message="Nome é obrigatório")
 	private String primeiroNome;
 	
+	@ApiModelProperty(example="Bezerra")
 	@NotEmpty(message="Sobre nome é obrigatório")
 	@JsonInclude(Include.NON_NULL)
 	private String sobreNome;
 	
+	@ApiModelProperty(example="maria@gmail.com")
 	@NotEmpty(message="Email é obrigatório")
 	@JsonInclude(Include.NON_NULL)
 	private String email;
 	
+	@ApiModelProperty(example="123.456.789-78")
 	@NotEmpty(message="CPF é obrigatório")
 	@JsonInclude(Include.NON_NULL)
 	private String cpf;
 	
+	@ApiModelProperty(example="09/09/1990")
 	@NotNull(message="Data de nascimento é obrigatório")
 	@DateTimeFormat(pattern ="dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	@JsonInclude(Include.NON_NULL)
 	private Date dataNascimento;
 	
+	@ApiModelProperty(example="MASCULINO OU FEMININO")
 	@Enumerated(EnumType.STRING)
 	@JsonInclude(Include.NON_NULL)
 	private StatusUsuario sexo;
 	
+	@ApiModelProperty(example="Titan")
 	@NotEmpty(message="Nome do Usuario é obrigatório")
 	@JsonInclude(Include.NON_NULL)
 	private String nomeUsuario;
 	
+	@ApiModelProperty(example="******")
 	@NotEmpty(message="Senha é obrigatório")
 	@JsonInclude(Include.NON_NULL)
 	private String senha;

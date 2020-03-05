@@ -26,6 +26,8 @@ import org.springframework.format.annotation.NumberFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 public class Evento {
 
@@ -33,32 +35,36 @@ public class Evento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	
+	@ApiModelProperty(example="Show Maravilha")
 	@NotEmpty(message ="Nome do Evento é obrigatorio")
 	private String nomeEvento;
 	
 
+	@ApiModelProperty(example="Gravação DVD")
 	@NotEmpty(message ="Descrição é obrigatorio")
 	@JsonInclude(Include.NON_NULL)
 	private String descricao;
 	
 	
+	@ApiModelProperty(example="900")
 	@NotNull(message="Ingresso é obrigatório")
 	@JsonInclude(Include.NON_NULL)
 	private int ingresso;
 	
-	
+	@ApiModelProperty(example="01/01/2020")
 	@NotNull(message="Data é obrigatório")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	@JsonInclude(Include.NON_NULL)
 	private Date data;
 	
+	@ApiModelProperty(example="21:00")
 	@NotEmpty(message ="Horario é obrigatorio")
 	@JsonInclude(Include.NON_NULL)
 	private String horario;
 
 	
+	@ApiModelProperty(example="87.00")
 	@NotNull
 	@DecimalMin(value = "0.01", message = "Valornão pode ser menro que 0,01")
 	@DecimalMax(value = "9999999999.99", message = "Valor não pode ser maior que 9.999.999,99")
@@ -66,11 +72,13 @@ public class Evento {
 	@JsonInclude(Include.NON_NULL)
 	private Double valorIngresso;
 	
+	@ApiModelProperty(example="Casas cadastradas")
 	@ManyToOne
 	@JoinColumn(name="casa_codigo",nullable=false)
 	@JsonInclude(Include.NON_NULL)
 	private EspacoEvento casa;
 	
+	@ApiModelProperty(example="Genero cadastrados")
 	@Enumerated(EnumType.STRING)
 	@JsonInclude(Include.NON_NULL)
 	private StatusGenero genero;

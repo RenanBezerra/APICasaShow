@@ -22,7 +22,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.gft.api.service.EventosService;
 import br.com.gft.model.Evento;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
+@Api(tags ="Evento")
 @RestController
 @RequestMapping("/api/evento")
 public class EventoResources {
@@ -30,6 +34,7 @@ public class EventoResources {
 	@Autowired
 	private EventosService eventoService;
 	
+	@ApiOperation("Lista eventos")
 	@GetMapping(produces = {
 			MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE
@@ -38,8 +43,9 @@ public class EventoResources {
 		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listar());
 	}
 	
+	@ApiOperation("Salva o evento")
 	@PostMapping
-	public ResponseEntity<Void> salvar(@Valid@RequestBody Evento evento ) {
+	public ResponseEntity<Void> salvar(@ApiParam(name ="corpo",value="Representação de um novo evento")@Valid@RequestBody Evento evento ) {
 		evento = eventoService.salvar(evento);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -47,25 +53,27 @@ public class EventoResources {
 		
 		return ResponseEntity.created(uri).build();
 	}
+	@ApiOperation("Lista o evento")
 	@GetMapping(value= "/{id}")
-	public ResponseEntity<Optional<Evento>> buscar (@PathVariable("id") Long id){
+	public ResponseEntity<Optional<Evento>> buscar (@ApiParam(value="ID de um Evento",example="1")@PathVariable("id") Long id){
 		Optional<Evento> evento = eventoService.buscar(id);
 		
 		
 		return ResponseEntity.status(HttpStatus.OK).body(evento);
 		
 	}
+	@ApiOperation("Deleta o evento")
 	@DeleteMapping(value="/{id}")
-	public ResponseEntity<Void>deletar(@PathVariable("id")Long id) {
+	public ResponseEntity<Void>deletar(@ApiParam(value="ID de um Evento",example="1")@PathVariable("id")Long id) {
 	
 			eventoService.deletar(id);
 		
 		return ResponseEntity.noContent().build();
 			
 		}
-	
+	@ApiOperation("Atualiza o evento")
 	@PutMapping(value="/{id}")
-	public ResponseEntity<Void>atualizar(@RequestBody Evento evento,
+	public ResponseEntity<Void>atualizar(@ApiParam(name ="corpo",value="Representação de um Evento com os novos dados")@RequestBody Evento evento,
 			@PathVariable("id")Long id) {
 		evento.setId(id);
 		eventoService.atualizar(evento);
