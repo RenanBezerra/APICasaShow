@@ -35,6 +35,7 @@ public class EspacoEvento {
 	@NotEmpty(message ="Local é obrigatorio")
 	private String local;
 	
+	@JsonInclude(Include.NON_EMPTY)
 	@OneToMany(cascade = CascadeType.ALL, mappedBy ="casa")
 	@JsonIgnore
 	private List<Evento> eventos;

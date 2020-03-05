@@ -6,8 +6,10 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import br.com.gft.api.exceptions.EspacoEventoExistenteException;
 import br.com.gft.api.exceptions.EspacoEventoNaoEncontradoException;
@@ -123,7 +125,20 @@ public class ResourceExceptionHandler {
 		
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(400l);
-		erro.setTitulo("Requisição invalida");
+		erro.setTitulo("Requisição invalida, prencha todos os atributos para salvar");
+		erro.setMensagemDesenvolvedor("http://erros.socialbooks.com/400");
+		erro.setTimestamp(System.currentTimeMillis());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+		 
+	}
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public ResponseEntity<DetalhesErro> handleMethodArgumentTypeMismatchException
+								(MethodArgumentTypeMismatchException e, HttpServletRequest request){
+		
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(450l);
+		erro.setTitulo("Requisição invalida, rota inexistente verifique o nome da rota");
 		erro.setMensagemDesenvolvedor("http://erros.socialbooks.com/400");
 		erro.setTimestamp(System.currentTimeMillis());
 		
@@ -132,6 +147,19 @@ public class ResourceExceptionHandler {
 	}
 	
 	
+	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+	public ResponseEntity<DetalhesErro> handleHttpRequestMethodNotSupportedException
+								(HttpRequestMethodNotSupportedException e, HttpServletRequest request){
+		
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(405l);
+		erro.setTitulo("Requisição invalida, para salvar verifique a rota correta");
+		erro.setMensagemDesenvolvedor("http://erros.socialbooks.com/400");
+		erro.setTimestamp(System.currentTimeMillis());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+		 
+	}
 	
 	
 	
