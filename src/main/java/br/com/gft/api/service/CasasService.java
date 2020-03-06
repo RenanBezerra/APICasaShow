@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.gft.api.exceptions.EspacoEventoExistenteException;
 import br.com.gft.api.exceptions.EspacoEventoNaoEncontradoException;
-
 import br.com.gft.model.EspacoEvento;
 import br.com.gft.repository.Casas;
 
@@ -74,10 +73,11 @@ public class CasasService {
 			return casas.findAll(Sort.by(Sort.Direction.DESC,"nomeCasa"));
 		}
 		
-		public Optional<EspacoEvento> buscarNome(String nome) {
-			Optional<EspacoEvento> casaEvento =casas.findByNomeCasa(nomeCasa);
+		
+		public EspacoEvento buscarNome(String nomeCasa) {
+			EspacoEvento casaEvento =casas.findByNomeCasa(nomeCasa);
 			
-			if(casaEvento.get().getNomeCasa()==null) {
+			if(casaEvento == null) {
 				throw new EspacoEventoNaoEncontradoException("A casa não pode ser encontrada.");
 				
 				

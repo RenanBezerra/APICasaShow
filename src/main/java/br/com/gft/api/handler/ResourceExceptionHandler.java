@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -169,6 +170,19 @@ public class ResourceExceptionHandler {
 		DetalhesErro erro = new DetalhesErro();
 		erro.setStatus(410l);
 		erro.setTitulo("Requisição invalida, para salvar verifique o campo do valorIngresso com . ponto");
+		erro.setMensagemDesenvolvedor("http://erros.socialbooks.com/400");
+		erro.setTimestamp(System.currentTimeMillis());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+		 
+	}
+	@ExceptionHandler(IncorrectResultSizeDataAccessException.class)
+	public ResponseEntity<DetalhesErro> handleIncorrectResultSizeDataAccessException
+								(IncorrectResultSizeDataAccessException e, HttpServletRequest request){
+		
+		DetalhesErro erro = new DetalhesErro();
+		erro.setStatus(400l);
+		erro.setTitulo("Requisição invalida,cuidado varios nomes na busca ");
 		erro.setMensagemDesenvolvedor("http://erros.socialbooks.com/400");
 		erro.setTimestamp(System.currentTimeMillis());
 		

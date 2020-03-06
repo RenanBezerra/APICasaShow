@@ -80,4 +80,14 @@ public class EventoResources {
 	
 		return ResponseEntity.noContent().build();
 	}
+	@ApiOperation("Lista as casas em ordem alfabética crescente por nome")
+	@GetMapping(value= "/capacidade/asc")
+	public ResponseEntity<List<Evento>> listarCrescente() {
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarCapacidadeCrescente());
+	}
+	@ApiOperation("Lista as casas em ordem alfabética crescente por nome")
+	@GetMapping(value= "/capacidade/desc")
+	public ResponseEntity<List<Evento>> listarDecrescente() {
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarCapacidadeDecrescente());
+	}
 }

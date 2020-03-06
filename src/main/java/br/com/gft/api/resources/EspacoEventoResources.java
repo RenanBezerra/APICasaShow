@@ -104,4 +104,12 @@ public class EspacoEventoResources {
 	public ResponseEntity<List<EspacoEvento>> listarDecrescente() {
 		return ResponseEntity.status(HttpStatus.OK).body(casasService.listarDecrescente());
 	}
+	@ApiOperation("Busca por nome")
+	@GetMapping(value= "/nome/{nomeCasa}")
+	public ResponseEntity<EspacoEvento> buscarNome(@ApiParam(value ="Nome de um Espaco_Evento",example="Maria")@PathVariable("nomeCasa") String nomeCasa) {
+		EspacoEvento espacoEvento = casasService.buscarNome(nomeCasa);
+		
+
+		return ResponseEntity.status(HttpStatus.OK).body(espacoEvento);
+		}
 }

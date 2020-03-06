@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.gft.api.exceptions.EventoExistenteException;
@@ -59,5 +60,13 @@ public class EventosService {
 	
 	private void verificarExistencia(Evento evento) {
 		buscar(evento.getId());
+	}
+	public List<Evento> listarCapacidadeCrescente() {
+			
+			return eventos.findAll(Sort.by(Sort.Direction.ASC,"ingresso"));
+		}
+	public List<Evento> listarCapacidadeDecrescente() {
+		
+		return eventos.findAll(Sort.by(Sort.Direction.DESC,"ingresso"));
 	}
 }
