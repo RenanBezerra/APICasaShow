@@ -80,14 +80,44 @@ public class EventoResources {
 	
 		return ResponseEntity.noContent().build();
 	}
-	@ApiOperation("Lista as casas em ordem alfabética crescente por nome")
+	@ApiOperation("Lista capacidade em ordem crescente")
 	@GetMapping(value= "/capacidade/asc")
 	public ResponseEntity<List<Evento>> listarCrescente() {
 		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarCapacidadeCrescente());
 	}
-	@ApiOperation("Lista as casas em ordem alfabética crescente por nome")
+	@ApiOperation("Lista capacidade em ordem decrescente")
 	@GetMapping(value= "/capacidade/desc")
 	public ResponseEntity<List<Evento>> listarDecrescente() {
 		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarCapacidadeDecrescente());
+	}
+	@ApiOperation("Lista data em ordem crescente")
+	@GetMapping(value= "/data/asc")
+	public ResponseEntity<List<Evento>> listarDataAsc() {
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarDataAsc());
+	}
+	@ApiOperation("Lista data em ordem decrescente")
+	@GetMapping(value= "/data/desc")
+	public ResponseEntity<List<Evento>> listarDataDesc() {
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarDataDesc());
+	}
+	@ApiOperation("Lista nome em ordem crescente")
+	@GetMapping(value= "/nome/asc")
+	public ResponseEntity<List<Evento>> listarNomeAsc() {
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarNomeAsc());
+	}
+	@ApiOperation("Lista nome em ordem decrescente")
+	@GetMapping(value= "/nome/desc")
+	public ResponseEntity<List<Evento>> listarNomeDesc() {
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarNomeDesc());
+	}
+	@ApiOperation("Lista valor do ingresso em ordem crescente")
+	@GetMapping(value= "/preco/asc")
+	public ResponseEntity<List<Evento>> listarPrecoAsc() {
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarPrecoAsc());
+	}
+	@ApiOperation("Lista valor do ingresso em ordem decrescente")
+	@GetMapping(value= "/preco/desc")
+	public ResponseEntity<List<Evento>> listarPrecoDesc() {
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarPrecoDesc());
 	}
 }
