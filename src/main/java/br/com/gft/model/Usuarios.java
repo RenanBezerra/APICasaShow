@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -66,7 +67,7 @@ public class Usuarios {
 	
 	@ApiModelProperty(example="******")
 	@NotEmpty(message="Senha é obrigatório")
-	@JsonInclude(Include.NON_NULL)
+	@JsonIgnore
 	private String senha;
 	
 	

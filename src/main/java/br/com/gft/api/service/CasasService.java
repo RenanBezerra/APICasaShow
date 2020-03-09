@@ -18,11 +18,13 @@ public class CasasService {
 
 	@Autowired
 	private Casas casas;
-	private String nomeCasa;
+	
 	
 		public List<EspacoEvento> listar(){
 			return casas.findAll();
 		}
+		
+		
 		
 		public Optional<EspacoEvento> buscar(Long id) {
 			Optional<EspacoEvento> casaEvento =casas.findById(id);

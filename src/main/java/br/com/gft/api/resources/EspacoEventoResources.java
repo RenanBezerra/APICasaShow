@@ -1,4 +1,4 @@
-package br.com.gft.api.resources;
+ package br.com.gft.api.resources;
 
 import java.net.URI;
 import java.util.List;
